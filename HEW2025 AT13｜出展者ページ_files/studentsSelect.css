@@ -1,0 +1,312 @@
+@charset "UTF-8";
+html, body {
+  width: 100%;
+}
+
+html {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
+  font-size: 62.5%; /*文字の初期化（10px相当）デフォ：16px*/
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.9rem; /*rootの文字サイズ（10px相当）=20px相当*/
+}
+
+p, li {
+  font-size: 1.3rem; /*rootの文字サイズ（10px相当）=14px相当*/
+}
+
+p {
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+}
+
+#js-search-popup .popup-inner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 1100px;
+  min-width: 960px;
+  padding: 15px 20px 15px 20px;
+  background-color: #fff;
+  z-index: 2;
+}
+#js-search-popup .popup-inner #studentSelect {
+  background-color: #fff;
+  margin: 0 auto;
+}
+#js-search-popup .popup-inner #studentSelect h1 {
+  font-size: 2rem;
+  color: #0F359D;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: solid gray 1px;
+  padding-bottom: 0.2em;
+  margin-bottom: 0.5em;
+  text-indent: 6%;
+  width: 94%;
+}
+#js-search-popup .popup-inner #studentSelect h1 span {
+  color: #6E6E6E;
+  font-size: 1.4rem;
+  font-weight: normal;
+  margin-left: 1rem;
+}
+#js-search-popup .popup-inner #studentSelectWrap {
+  font-size: 0.6rem;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div h2 {
+  color: #ffffff;
+  font-size: 1.6rem;
+  background-color: #0174DF;
+  padding: 0.6em;
+  margin-right: 1em;
+  width: 14.3%;
+  min-width: 14.3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div h2:nth-of-type(1), #js-search-popup .popup-inner #studentSelectWrap > div h2:nth-of-type(2), #js-search-popup .popup-inner #studentSelectWrap > div h2:nth-of-type(3) {
+  padding: 0.3em;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div h2:nth-of-type(4) {
+  background-color: red;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div div > div {
+  display: flex;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div div > div h3 {
+  width: 20%;
+  box-sizing: border-box;
+  padding: 0 0.5rem;
+  margin-right: 1rem;
+  background-color: #0174DF;
+  font-size: 1.3rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  border-bottom: #ffffff 1px solid;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div div > div ul {
+  width: 80%;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div ul li {
+  margin-right: 1.3rem;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div ul li label {
+  font-size: 15px;
+  display: inline-block;
+  padding-left: 25px;
+  cursor: pointer;
+  height: 28px;
+  line-height: 28px;
+  position: relative;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div ul li label::before {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: solid 3px #555;
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 6px;
+  transition: 0.1s ease-in-out;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div ul li input[type=checkbox] {
+  display: none;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div ul li input[type=checkbox]:checked + label:before {
+  transform: rotate(45deg);
+  border-top: 0;
+  border-left: 0;
+  width: 10px;
+  left: 5px;
+  top: 3px;
+  border-color: #0F359D;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div ul li input[type=checkbox]:checked + label {
+  color: #0F359D;
+  background: linear-gradient(transparent 60%, #ff6 60%);
+}
+#js-search-popup .popup-inner #studentSelectWrap .areaSelect {
+  position: relative;
+}
+#js-search-popup .popup-inner #studentSelectWrap .areaSelect p {
+  background-color: #ff0000;
+  padding: 1rem;
+  color: #ffffff;
+  font-weight: bold;
+  position: absolute;
+  top: -140%;
+  left: -85px;
+}
+#js-search-popup .popup-inner #studentSelectWrap .areaSelect p:after {
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  pointer-events: none;
+  position: absolute;
+  border-color: rgba(0, 153, 255, 0);
+  border-top-width: 14px;
+  border-bottom-width: 14px;
+  border-left-width: 5px;
+  border-right-width: 5px;
+  margin-left: -5px;
+  border-top-color: #ff0000;
+  top: 97%;
+  left: 92%;
+}
+#js-search-popup .popup-inner #studentSelectWrap .yearSelect {
+  position: relative;
+}
+#js-search-popup .popup-inner #studentSelectWrap .yearSelect p {
+  background-color: #ff0000;
+  padding: 1rem;
+  color: #ffffff;
+  font-weight: bold;
+  position: absolute;
+  top: -15%;
+  left: -140px;
+  z-index: 110;
+}
+#js-search-popup .popup-inner #studentSelectWrap .yearSelect p:after {
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  pointer-events: none;
+  position: absolute;
+  border-color: rgba(27, 166, 3, 0);
+  border-top-width: 7px;
+  border-bottom-width: 7px;
+  border-left-width: 13px;
+  border-right-width: 13px;
+  margin-top: -7px;
+  border-left-color: #ff0000;
+  left: 99%;
+  top: 51%;
+}
+#js-search-popup .popup-inner #studentSelectWrap .schoolSelect {
+  margin-bottom: 1rem;
+  position: relative;
+}
+#js-search-popup .popup-inner #studentSelectWrap .schoolSelect p {
+  background-color: #ff0000;
+  padding: 1rem;
+  color: #ffffff;
+  font-weight: bold;
+  position: absolute;
+  top: 125%;
+  left: -85px;
+}
+#js-search-popup .popup-inner #studentSelectWrap .schoolSelect p:after {
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  pointer-events: none;
+  position: absolute;
+  border-color: rgba(27, 166, 3, 0);
+  border-top-width: 15px;
+  border-bottom-width: 15px;
+  border-left-width: 7px;
+  border-right-width: 7px;
+  margin-left: -10px;
+  border-bottom-color: #ff0000;
+  bottom: 97%;
+  left: 92%;
+}
+#js-search-popup .popup-inner #studentSelectWrap .schoolSelect + p {
+  font-weight: 700;
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 15px;
+  text-align: center;
+  background-color: #0F359D;
+  color: #ffffff;
+}
+#js-search-popup .popup-inner #studentSelectWrap .schoolSelect + p i {
+  font-size: 1.7rem;
+  margin-right: 0.5rem;
+}
+#js-search-popup .popup-inner #studentSelectWrap .workSelect h2 {
+  margin-right: 0.3rem;
+}
+#js-search-popup .popup-inner #studentSelectWrap .workSelect ul {
+  border-bottom: dashed #6E6E6E 1px;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div:nth-of-type(4) {
+  align-items: stretch;
+  position: relative;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div:nth-of-type(4) ul {
+  padding: 0.3em 0em;
+  border-bottom: dashed #6E6E6E 1px;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div:nth-of-type(4) p {
+  background-color: #ff0000;
+  padding: 1rem;
+  color: #ffffff;
+  font-weight: bold;
+  position: absolute;
+  top: 35%;
+  left: -85px;
+}
+#js-search-popup .popup-inner #studentSelectWrap > div:nth-of-type(4) p:after {
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  pointer-events: none;
+  position: absolute;
+  border-color: rgba(0, 153, 255, 0);
+  border-top-width: 14px;
+  border-bottom-width: 14px;
+  border-left-width: 5px;
+  border-right-width: 5px;
+  margin-left: -5px;
+  border-top-color: #ff0000;
+  top: 97%;
+  left: 92%;
+}
+#js-search-popup .popup-inner #studentSelectWrap .selectBtn {
+  background-color: #fb8500;
+  font-size: 1.8rem;
+  color: #ffffff;
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+}
+#js-search-popup .popup-inner #studentSelectWrap .selectBtn:hover {
+  transition: 0.2s;
+  background-color: #7e150d;
+}
+#js-search-popup .popup-inner #studentSelectWrap .contactSelect h2 {
+  font-size: 1.385rem;
+  margin-right: 1.8rem;
+}/*# sourceMappingURL=studentsSelect.css.map */

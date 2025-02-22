@@ -1,0 +1,1450 @@
+@charset "UTF-8";
+html, body {
+  width: 100%;
+}
+
+html {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
+  font-size: 62.5%; /*文字の初期化（10px相当）デフォ：16px*/
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 2rem; /*rootの文字サイズ（10px相当）=20px相当*/
+}
+
+p, li, pre {
+  font-size: 1.4rem; /*rootの文字サイズ（10px相当）=14px相当*/
+}
+
+p, pre {
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+}
+
+p.studentWorkBtn.addAlert {
+  position: relative;
+}
+
+p.studentWorkBtn.addAlert:hover:before {
+  content: "万一、オンラインに入室できない場合は、しばらくお待ち頂き再入室をお願いいたします。（お手数お掛けいたします）";
+  display: block;
+  position: absolute;
+  top: -70px;
+  z-index: 200;
+  width: 350px;
+  padding: 1rem;
+  background-color: yellow;
+}
+
+#studentDetailWrap {
+  padding-bottom: 10rem;
+}
+#studentDetailWrap.studentEvalationDetail {
+  background-color: #d4ecfa;
+}
+#studentDetailWrap.studentEvalationDetail .settionReserve {
+  background-color: #ffffff !important;
+}
+#studentDetailWrap.studentEvalationDetail .addSettionReserveWrap .settionReserve ul {
+  background-color: #ffffff !important;
+}
+#studentDetailWrap.studentEvalationDetail #studentDetail {
+  background-color: #d4ecfa;
+}
+#studentDetailWrap.studentEvalationDetail #studentDetail h1 {
+  font-size: 3rem;
+  color: #0F359D;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  padding: 2rem 0rem 3rem;
+  position: relative;
+  background-color: #0F359D;
+  margin-bottom: 2rem;
+}
+#studentDetailWrap.studentEvalationDetail #studentDetail h1::before {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  width: 100%;
+  height: 100%;
+  content: "";
+  border: 2px solid #b7dcf1;
+}
+#studentDetailWrap #studentDetail {
+  background-color: #fff;
+  width: 1120px;
+  margin: 0 auto;
+  padding-top: 5rem;
+  position: relative;
+}
+#studentDetailWrap #studentDetail .zoomPassInformation {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  width: 330px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 5px gray;
+  border: solid #1ba603 2px;
+  padding: 0;
+}
+#studentDetailWrap #studentDetail .zoomPassInformation input[type=checkbox] {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  display: block;
+  transform: scale(1.5);
+  border: none;
+}
+#studentDetailWrap #studentDetail .zoomPassInformation input[type=checkbox]:checked + p {
+  display: none;
+}
+#studentDetailWrap #studentDetail .zoomPassInformation h3 {
+  background: #1ba603;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0.5rem;
+  text-align: left;
+  text-indent: 2rem;
+}
+#studentDetailWrap #studentDetail .zoomPassInformation h3 span {
+  font-size: 0.8rem;
+}
+#studentDetailWrap #studentDetail .zoomPassInformation p {
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: bold;
+  text-align: left;
+  width: 100%;
+  padding: 1rem;
+  transition: 0.2s;
+}
+#studentDetailWrap #studentDetail .zoomPassInformation p span {
+  color: #ff0000;
+  font-size: 1.7rem;
+}
+#studentDetailWrap #studentDetail h1 {
+  font-size: 3rem;
+  color: #0F359D;
+  font-weight: bold;
+  text-align: center;
+  padding: 2rem 0rem 3rem;
+  position: relative;
+  background-color: #c6e3f6;
+  margin-bottom: 2rem;
+}
+#studentDetailWrap #studentDetail h1::before {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  width: 100%;
+  height: 100%;
+  content: "";
+  border: 2px solid #3f51b5;
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea p {
+  width: 40%;
+  margin: 20px;
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea input[type=button] {
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  padding: 2.5rem;
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .studentContactBtn2, #studentDetailWrap #studentDetail .studentContEvalBtnArea .studentEvalutionBtn {
+  background-color: #fb8500;
+  position: relative;
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .studentContactBtn2:hover, #studentDetailWrap #studentDetail .studentContEvalBtnArea .studentEvalutionBtn:hover {
+  transition: 0.2s;
+  background-color: #582800;
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .studentContactBtn2 input[type=button], #studentDetailWrap #studentDetail .studentContEvalBtnArea .studentEvalutionBtn input[type=button] {
+  position: relative;
+  font-size: 1.5rem;
+  background: none;
+  z-index: 1000;
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .studentContactBtn2:before, #studentDetailWrap #studentDetail .studentContEvalBtnArea .studentEvalutionBtn:before {
+  position: absolute;
+  z-index: 110;
+  top: 9px;
+  left: 65%;
+  margin-left: 90px;
+  font-family: "Font Awesome 5 Free";
+  content: "\f164";
+  font-weight: 300;
+  font-size: 3.5rem;
+  color: rgba(0, 0, 0, 0.3);
+  transition: 0.2s;
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .studentContactBtn2:hover::before {
+  color: rgba(255, 255, 255, 0.5);
+  transform: rotate(-15deg);
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .studentEvalutionBtn {
+  background-color: #00a6f8;
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .studentEvalutionBtn:hover {
+  transition: 0.2s;
+  background-color: #043953;
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .studentEvalutionBtn input[type=button] {
+  padding-top: 1.5rem;
+  padding-bottom: 3.5rem;
+  background: none;
+  z-index: 1000;
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .studentEvalutionBtn input[type=button]:hover {
+  background: none;
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .studentEvalutionBtn:before {
+  position: absolute;
+  z-index: 110;
+  top: 10px;
+  left: 65%;
+  margin-left: 90px;
+  font-family: "Font Awesome 5 Free";
+  content: "\f044";
+  font-weight: 400;
+  font-size: 3.5rem;
+  color: rgba(0, 0, 0, 0.3);
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .studentEvalutionBtn::after {
+  content: "『ピックアップリスト』に追加されます";
+  display: inline-block;
+  width: 55%;
+  text-align: center;
+  color: #fff;
+  font-size: 1.2rem;
+  position: absolute;
+  top: calc(50% + 1.5rem);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .studentEvalutionBtn:hover::before {
+  color: rgba(255, 255, 255, 0.5);
+  transform: rotate(-15deg);
+}
+#studentDetailWrap #studentDetail .ditailHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: solid 2px #0F359D;
+  border-bottom: solid 2px #0F359D;
+  padding: 1rem 2rem;
+  color: #0F359D;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  position: relative;
+}
+#studentDetailWrap #studentDetail .ditailHeader .toOwnStudentId {
+  position: absolute;
+  top: -18px;
+  right: 0;
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+#studentDetailWrap #studentDetail .ditailHeader h2 {
+  display: flex;
+  font-size: 1.55rem;
+}
+#studentDetailWrap #studentDetail .ditailHeader h2 span {
+  margin-right: 1.5rem;
+  position: relative;
+}
+#studentDetailWrap #studentDetail .ditailHeader h2 span::before {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  top: -1.7rem;
+  left: -0.45rem;
+  color: #0F359D;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+#studentDetailWrap #studentDetail .ditailHeader h2 span:nth-of-type(1) {
+  min-width: 100px;
+}
+#studentDetailWrap #studentDetail .ditailHeader h2 span:nth-of-type(1)::before {
+  content: "【 出展番号 】";
+}
+#studentDetailWrap #studentDetail .ditailHeader h2 span:nth-of-type(2) {
+  min-width: 110px;
+}
+#studentDetailWrap #studentDetail .ditailHeader h2 span:nth-of-type(2)::before {
+  content: "【 学生名 】";
+}
+#studentDetailWrap #studentDetail .ditailHeader h2 span:nth-of-type(3) {
+  min-width: 80px;
+}
+#studentDetailWrap #studentDetail .ditailHeader h2 span:nth-of-type(3)::before {
+  content: "【 作品名 】";
+}
+#studentDetailWrap #studentDetail .ditailHeader ul {
+  font-weight: normal;
+  max-width: 330px;
+}
+#studentDetailWrap #studentDetail .ditailHeader ul li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#studentDetailWrap #studentDetail .ditailHeader ul span {
+  font-weight: 500;
+}
+#studentDetailWrap #studentDetail .ditailHeader .contactedIcon, #studentDetailWrap #studentDetail .ditailHeader .evaluatedIcon {
+  position: absolute;
+  z-index: 100;
+  transform: rotate(-15deg);
+  top: 300px;
+  left: -20px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 135px;
+  height: 135px;
+  border-radius: 67px;
+  background-color: #fb8500;
+}
+#studentDetailWrap #studentDetail .ditailHeader .contactedIcon span, #studentDetailWrap #studentDetail .ditailHeader .evaluatedIcon span {
+  font-size: 1.6rem;
+}
+#studentDetailWrap #studentDetail .ditailHeader .contactedIcon p {
+  position: relative;
+}
+#studentDetailWrap #studentDetail .ditailHeader .contactedIcon p:before {
+  position: absolute;
+  z-index: -1;
+  top: -35px;
+  right: 15px;
+  transform: rotate(15deg);
+  font-family: "Font Awesome 5 Free";
+  content: "\f164";
+  color: rgba(0, 0, 0, 0.1);
+  font-size: 7.5rem;
+  font-weight: 400;
+}
+#studentDetailWrap #studentDetail .ditailHeader .evaluatedIcon {
+  background-color: #00a6f8;
+  z-index: 110;
+}
+#studentDetailWrap #studentDetail .ditailHeader .evaluatedIcon p {
+  position: relative;
+}
+#studentDetailWrap #studentDetail .ditailHeader .evaluatedIcon p:before {
+  position: absolute;
+  z-index: -1;
+  top: -35px;
+  left: -3px;
+  transform: rotate(15deg);
+  font-family: "Font Awesome 5 Free";
+  content: "\f044";
+  color: rgba(0, 0, 0, 0.1);
+  font-size: 7.5rem;
+  font-weight: 400;
+}
+#studentDetailWrap #studentDetail .studentProf {
+  position: relative;
+}
+#studentDetailWrap #studentDetail .studentProf .freeesessionJoingBtn {
+  width: 400px;
+  height: 35px;
+  transition: 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#studentDetailWrap #studentDetail .studentProf .freeesessionJoingBtn button {
+  color: #ffffff;
+  font-size: 1.35rem;
+  line-height: 100%;
+  /* margin: 0.5rem; */
+  background-color: #00369D;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  /* display: block; */
+  width: 400px;
+  height: 35px;
+  text-align: center;
+}
+#studentDetailWrap #studentDetail .studentProf .freeesessionJoingBtn button[disabled=disabled] {
+  text-align: left;
+}
+#studentDetailWrap #studentDetail .studentProf .freeesessionJoingBtn button[disabled=disabled]:hover {
+  background-color: #00369D;
+  cursor: default;
+}
+#studentDetailWrap #studentDetail .studentProf .freeesessionJoingBtn button:hover {
+  background-color: #07163f;
+}
+#studentDetailWrap #studentDetail .studentProf .studentProf {
+  display: block;
+}
+#studentDetailWrap #studentDetail .studentProf div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem 0rem;
+  border-bottom: dashed 1px gray;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(1) {
+  border-top: dashed 1px gray;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(1) p {
+  width: 80%;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll {
+  display: flex;
+  border-top: none;
+  margin-bottom: 2rem !important;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll.borderAdd {
+  border-bottom: dashed 1px gray;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div {
+  display: block;
+  border: none;
+  padding: 0rem;
+  margin-bottom: 0.5rem;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div h4 {
+  font-size: 1.4rem;
+  color: #ffffff;
+  background-color: #0F359D;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li {
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li:nth-of-type(1) {
+  width: calc(40px + 0.5rem);
+  padding-right: 0.5rem;
+  border-right: solid #b0b0b0 1px;
+  font-size: 1.2rem;
+  color: #ff0000;
+  font-weight: bold;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li:nth-of-type(1).freeTime {
+  color: #000000;
+  font-size: 1.3rem;
+  font-weight: normal;
+  width: 82px;
+  /* margin: 0rem; */
+  margin-left: 47px;
+  padding-right: 0rem;
+  padding-left: 0.5rem;
+  /* margin: 0rem; */
+  border-right: solid #b0b0b0 1px;
+  border-left: solid #b0b0b0 1px;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li:nth-of-type(1).freeTime + li {
+  width: calc(81px + 0.5rem);
+  padding-right: 0.5rem;
+  border-right: solid #b0b0b0 1px;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li:nth-of-type(1).freeTime + li + li {
+  width: auto;
+  font-size: 1.2rem;
+  border: none;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li:nth-of-type(1).freeTime + li + li + li {
+  font-size: 1.25rem;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li:nth-of-type(1).freeTime + li + li + li span {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li:nth-of-type(1).freeTime + li + li + li a {
+  color: #0174df;
+  text-decoration: underline;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li:nth-of-type(2) {
+  padding-right: 0.5rem;
+  border-right: solid #b0b0b0 1px;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li:nth-of-type(3) {
+  width: calc(81px + 0.5rem);
+  padding-right: 0.5rem;
+  border-right: solid #b0b0b0 1px;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li:nth-of-type(4) {
+  font-size: 1.2rem;
+  margin-right: 0.7rem;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li:nth-of-type(5) {
+  font-size: 1.15rem;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li:nth-of-type(5) span {
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li:nth-of-type(5) a {
+  color: #0174df;
+  text-decoration: underline;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li button {
+  background-color: #2196F3;
+  color: #ffffff;
+  font-size: 1.25rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.3rem;
+  transition: 0.2s;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li button:hover {
+  background-color: #07163f;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li button[disabled=disabled] {
+  background-color: #686868;
+  color: #ffffff;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll div ul li button[disabled=disabled]:hover {
+  background-color: #686868;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll > div {
+  width: calc(80% + 2rem);
+  display: flex;
+  margin-bottom: 0rem;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserveAll:last-child {
+  margin-bottom: 0rem;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) {
+  border-top: none;
+  position: relative;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) p {
+  font-size: 2rem;
+  color: #0F359D;
+  font-weight: bold;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) p:nth-of-type(2) {
+  font-size: 1.2rem;
+  margin-right: 1.5rem;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) p:nth-of-type(2) a {
+  display: block;
+  color: #ffffff;
+  background-color: #0F359D;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: 0.2s;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) p:nth-of-type(2) a:hover {
+  color: #aeadba;
+  background-color: #07163f;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .offhour {
+  position: relative;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .offhour span {
+  position: absolute;
+  bottom: -15px;
+  left: 11px;
+  z-index: 1000;
+  font-size: 1.35rem;
+  font-weight: 600;
+  width: 715px;
+  background-color: yellow;
+  padding: 0.5rem 1rem;
+  color: #0f359d;
+  text-align: left;
+  border-radius: 2rem;
+  display: block;
+  text-align: center;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .zoomPresentationSupplement {
+  position: absolute;
+  bottom: -25px;
+  left: 215px;
+  min-width: 300px;
+  border: none;
+  text-align: center;
+  z-index: 10;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .zoomPresentationSupplement p {
+  font-size: 1.3rem;
+  font-weight: bold;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: #ffffff;
+  width: 100%;
+  background-color: #ff3c00;
+  border-radius: 2rem;
+  box-shadow: 1px 1px 3px grey;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport {
+  height: 100%;
+  width: 470px;
+  border: none;
+  position: absolute;
+  left: 660px;
+  display: flex;
+  align-items: center;
+  transition: 0.2s;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport label {
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  color: #808080;
+  font-size: 1.3rem;
+  transition: 0.2s;
+  cursor: pointer;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport label span {
+  display: inline-block;
+  position: relative;
+  background-color: transparent;
+  width: 25px;
+  height: 25px;
+  transform-origin: center;
+  border: 2px solid #9c9c9c;
+  background-color: #e4e4e4;
+  border-radius: 50%;
+  margin-right: 5px;
+  transition: background-color 150ms 200ms, transform 350ms cubic-bezier(0.78, -1.22, 0.17, 1.89);
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport label span:before {
+  content: "";
+  width: 5px;
+  height: 2px;
+  border-radius: 2px;
+  background: gray;
+  position: absolute;
+  transform: rotate(45deg);
+  top: 11px;
+  left: 7px;
+  transition: width 50ms ease 50ms;
+  transform-origin: 0% 0%;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport label span:after {
+  content: "";
+  width: 10px;
+  height: 2px;
+  border-radius: 2px;
+  background: gray;
+  position: absolute;
+  transform: rotate(305deg);
+  top: 15px;
+  left: 8px;
+  transition: width 50ms ease;
+  transform-origin: 0% 0%;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport label:hover {
+  color: #06b814;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport label:hover span {
+  background: #caf0cf;
+  border: 2px solid #06b814;
+  transition: 100ms;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport label:hover span:before {
+  width: 5px;
+  background: #06b814;
+  transition: width background 100ms ease;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport label:hover span:after {
+  width: 10px;
+  background: #06b814;
+  transition: width background 150ms ease 100ms;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=checkbox] {
+  display: none;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=checkbox][disabled=disabled] + label:hover {
+  color: #808080;
+  cursor: default;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=checkbox][disabled=disabled] + label:hover span {
+  border: 2px solid #9c9c9c;
+  background-color: #e4e4e4;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=checkbox][disabled=disabled] + label:hover span:before {
+  background: gray;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=checkbox][disabled=disabled] + label:hover span::after {
+  background: gray;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=checkbox]:checked + label {
+  color: #000000;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=checkbox]:checked + label span {
+  background-color: #fff;
+  transform: scale(1.25);
+  border: 2px solid #06b814;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=checkbox]:checked + label span:after {
+  width: 10px;
+  background: #06b814;
+  transition: width 150ms ease 100ms;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=checkbox]:checked + label span:before {
+  width: 5px;
+  background: #06b814;
+  transition: width 150ms ease 100ms;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=checkbox]:checked + label:hover span {
+  background-color: #fff;
+  transform: scale(1.25);
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=checkbox]:checked + label:hover span:after {
+  width: 10px;
+  background: #1790b5;
+  transition: width 150ms ease 100ms;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=checkbox]:checked + label:hover span:before {
+  width: 5px;
+  background: #1790b5;
+  transition: width 150ms ease 100ms;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=button] {
+  position: absolute;
+  top: 7%;
+  right: 10px;
+  z-index: 100;
+  font-size: 1.5rem;
+  color: #022D64;
+  font-weight: 500;
+  display: block;
+  padding: 0 3rem;
+  height: 85%;
+  border-radius: 1rem;
+  background-color: #FDFF00;
+  border: none;
+  display: flex;
+  align-items: center;
+  transition: 0.2s;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=button]:hover {
+  background-color: #022D64;
+  color: #FDFF00;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=button] + span {
+  display: block;
+  position: relative;
+  top: -50px;
+  left: 110px;
+  width: 140px;
+  height: 45px;
+  z-index: 1000;
+  background: #fb002d;
+  padding: 10px;
+  text-align: left;
+  color: #FFFFFF;
+  font-size: 12px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=button] + span::after {
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  pointer-events: none;
+  position: absolute;
+  border-color: rgba(0, 153, 255, 0);
+  border-top-width: 13px;
+  border-bottom-width: 13px;
+  border-left-width: 7px;
+  border-right-width: 7px;
+  margin-left: -7px;
+  border-top-color: #fb002d;
+  top: 100%;
+  left: 16%;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=button]:disabled {
+  color: #ffffff;
+  background-color: #b6b6b6;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(2) .freeesessionReport input[type=button]:disabled + span {
+  display: none;
+}
+#studentDetailWrap #studentDetail .studentProf div:nth-of-type(3) {
+  border-bottom: none;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserve {
+  padding: 0rem;
+  border-bottom: 0px;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserve ul {
+  display: flex;
+}
+#studentDetailWrap #studentDetail .studentProf div.settionReserve ul li {
+  font-size: 1.5rem;
+  margin: 0rem 0.3rem;
+}
+#studentDetailWrap #studentDetail .studentProf div h3 {
+  font-size: 1.5rem;
+  color: #0F359D;
+  font-weight: bold;
+  width: calc(20% - 2rem);
+  padding: 0rem 2rem;
+  text-align: center;
+}
+#studentDetailWrap #studentDetail .studentProf div h3 span {
+  display: block;
+  color: #000000;
+  font-weight: normal;
+  font-size: 1.35rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+#studentDetailWrap #studentDetail .studentProf div h3 span span {
+  display: block;
+  color: #ff0000;
+  font-weight: bold;
+  font-size: 1.45rem;
+  width: 150px;
+  margin: 0.2rem auto;
+  text-decoration: underline;
+}
+#studentDetailWrap #studentDetail .studentProf div p:nth-of-type(1) {
+  margin-right: 1.5rem;
+}
+#studentDetailWrap #studentDetail .studentProf div p:nth-of-type(2) input[type=button] {
+  color: #fff;
+  font-weight: bold;
+  height: 42px;
+  line-height: 42px;
+  padding: 0 4.5rem 0 1.5rem;
+  background-color: #fb8500;
+}
+#studentDetailWrap #studentDetail .studentProf div p:nth-of-type(2) input[type=button]:hover {
+  background-color: #924501;
+}
+#studentDetailWrap #studentDetail .studentProf div p:nth-of-type(2) i {
+  color: #fff;
+  font-size: 2.5rem;
+  position: relative;
+  left: -4rem;
+  top: 0.4rem;
+}
+#studentDetailWrap #studentDetail .studentProf .settionReserveWrap {
+  display: block;
+  margin-right: 1rem;
+  width: 50%;
+}
+#studentDetailWrap #studentDetail .studentProf .settionReserveWrap .settionReserve {
+  padding: 0.8rem;
+  background-color: #ededed;
+  border-radius: 0.5rem;
+}
+#studentDetailWrap #studentDetail .studentProf > .pickupEvaluationBtn {
+  width: 240px;
+  position: absolute;
+  background-color: #ffffff;
+  border-left: 5px solid #ffffff;
+  top: 0%;
+  right: 0px;
+  flex-wrap: wrap;
+  padding: 0;
+  border: none;
+  height: 100%;
+}
+#studentDetailWrap #studentDetail .studentProf > .pickupEvaluationBtn > p.studentContactBtn2 {
+  color: #ffffff;
+  display: inline-block;
+  margin-bottom: 2px;
+  height: 100%;
+  width: 100%;
+  background-color: #fb8500;
+}
+#studentDetailWrap #studentDetail .studentProf > .pickupEvaluationBtn > p.studentContactBtn2:hover {
+  transition: 0.2s;
+  background-color: #582800;
+}
+#studentDetailWrap #studentDetail .studentProf > .pickupEvaluationBtn > p.studentContactBtn2 input[type=button] {
+  display: block;
+  width: 240px;
+  height: 100%;
+  line-height: 100%;
+  box-sizing: border-box;
+  text-indent: 20px;
+  font-weight: bold;
+  /* padding-right: 6rem; */
+  /* padding-right: 6rem; */
+  font-size: 1.5rem;
+  position: relative;
+  z-index: 1000;
+}
+#studentDetailWrap #studentDetail .studentProf > .pickupEvaluationBtn > p.studentContactBtn2:before {
+  position: absolute;
+  z-index: 110;
+  top: 50%;
+  margin-top: -25px;
+  right: 5%;
+  /* transform: translate(-50%, -49%); */
+  /* margin-left: 70px; */
+  font-family: "Font Awesome 5 Free";
+  content: "\f164";
+  font-weight: 400;
+  font-size: 3.5rem;
+  color: rgba(0, 0, 0, 0.3);
+  transition: 0.2s;
+}
+#studentDetailWrap #studentDetail .studentProf > .pickupEvaluationBtn > p.studentContactBtn2:hover::before {
+  color: rgba(255, 255, 255, 0.5);
+  transform: rotate(-15deg);
+}
+#studentDetailWrap #studentDetail .studentProf > .pickupEvaluationBtn > p.contactRemove {
+  color: #000000;
+  background-color: #ffd000;
+}
+#studentDetailWrap #studentDetail .studentProf > .pickupEvaluationBtn > p.contactRemove:hover {
+  transition: 0.2s;
+  background-color: #614f00;
+  color: #ffffff;
+}
+#studentDetailWrap #studentDetail .studentProf > .pickupEvaluationBtn > p.contactRemove input[type=button]#studentContactBtn {
+  font-size: 1.3rem;
+}
+#studentDetailWrap #studentDetail .studentProf > .pickupEvaluationBtn > p.contactRemove:before {
+  position: absolute;
+  z-index: 110;
+  top: 50%;
+  margin-top: -25px;
+  right: 5%;
+  font-family: "Font Awesome 5 Free";
+  content: "\f12d";
+  font-weight: 900;
+  font-size: 3.5rem;
+  color: rgba(0, 0, 0, 0.3);
+  transition: 0.2s;
+}
+#studentDetailWrap #studentDetail .studentProf > .pickupEvaluationBtn > p.contactRemove:hover::before {
+  color: rgba(255, 255, 255, 0.5);
+  transform: rotate(0deg);
+  right: 4%;
+}
+#studentDetailWrap #studentDetail .studentProf > .pickupEvaluationBtn > p.studentEvalutionBtn {
+  display: inline-block;
+}
+#studentDetailWrap #studentDetail .studentProf > .pickupEvaluationBtn > p.studentEvalutionBtn input[type=button] {
+  display: block;
+  color: #fff;
+  width: 240px;
+  height: 40px;
+  line-height: 40px;
+  box-sizing: border-box;
+  text-indent: 20px;
+  font-weight: bold;
+  /* padding-right: 6rem; */
+  /* padding-right: 6rem; */
+  background-color: #00a6f8;
+  font-size: 1.5rem;
+}
+#studentDetailWrap #studentDetail .studentProf > .pickupEvaluationBtn > p.studentEvalutionBtn input[type=button]:hover {
+  transition: 0.2s;
+  background-color: #043953;
+}
+#studentDetailWrap #studentDetail .studentProf > .pickupEvaluationBtn > p.studentEvalutionBtn:before {
+  position: absolute;
+  z-index: 110;
+  bottom: 2px;
+  left: 50%;
+  margin-left: 70px;
+  font-family: "Font Awesome 5 Free";
+  content: "\f044";
+  font-weight: 400;
+  font-size: 2.5rem;
+  color: rgba(0, 0, 0, 0.3);
+}
+#studentDetailWrap #studentDetail .studentWorkBtnArea {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  position: relative;
+}
+#studentDetailWrap #studentDetail .studentWorkBtnArea > p {
+  width: 32.3%;
+  margin: 0 10px;
+}
+#studentDetailWrap #studentDetail .studentWorkBtnArea p:nth-of-type(3) {
+  position: relative;
+}
+#studentDetailWrap #studentDetail .studentWorkBtnArea .studentWorkBtn {
+  position: relative;
+}
+#studentDetailWrap #studentDetail .studentWorkBtnArea .studentWorkBtn a {
+  color: #0F359D;
+  display: block;
+  width: 300px;
+  text-align: center;
+  font-weight: bold;
+  padding: 1.5rem;
+  border: solid 1px gray;
+}
+#studentDetailWrap #studentDetail .studentWorkBtnArea .studentWorkBtn a:hover {
+  transition: 0.2s;
+  color: #ffffff;
+  background-color: #09214f;
+}
+#studentDetailWrap #studentDetail .studentWorkBtnArea .contactedIcon {
+  position: absolute;
+  z-index: 100;
+  transform: rotate(-15deg);
+  top: 80px;
+  left: -20px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 135px;
+  height: 135px;
+  border-radius: 67px;
+  background-color: #fb8500;
+}
+#studentDetailWrap #studentDetail .studentWorkBtnArea .contactedIcon span {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+#studentDetailWrap #studentDetail .studentWorkBtnArea .contactedIcon p {
+  position: relative;
+}
+#studentDetailWrap #studentDetail .studentWorkBtnArea .contactedIcon p:before {
+  position: absolute;
+  z-index: -1;
+  top: -35px;
+  right: 15px;
+  transform: rotate(15deg);
+  font-family: "Font Awesome 5 Free";
+  content: "\f164";
+  color: rgba(0, 0, 0, 0.1);
+  font-size: 7.5rem;
+  font-weight: 400;
+}
+#studentDetailWrap #studentDetail .studentWorkBtnArea .evaluatedIcon {
+  position: absolute;
+  z-index: 100;
+  transform: rotate(-15deg);
+  top: 80px;
+  left: -20px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 135px;
+  height: 135px;
+  border-radius: 67px;
+  background-color: #00a6f8;
+  z-index: 110;
+}
+#studentDetailWrap #studentDetail .studentWorkBtnArea .evaluatedIcon span {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+#studentDetailWrap #studentDetail .worksDitail {
+  display: flex;
+}
+#studentDetailWrap #studentDetail .worksDitail .contact {
+  display: none;
+}
+#studentDetailWrap #studentDetail .worksDitail .worksImage {
+  width: calc(60% - 4rem);
+  align-items: stretch;
+  margin: 2rem;
+}
+#studentDetailWrap #studentDetail .worksDitail .worksImage img {
+  display: block;
+}
+#studentDetailWrap #studentDetail .worksDitail .worksImage img[src*=h] {
+  /* width: calc(50% - 2rem); */
+  /* float: left; */
+  width: 97%;
+  float: none;
+  margin: 1rem;
+  box-sizing: border-box;
+}
+#studentDetailWrap #studentDetail .worksDitail .worksImage img[src*=h]:nth-of-type(3) {
+  clear: both;
+}
+#studentDetailWrap #studentDetail .worksDitail .worksImage img[src*=w] {
+  width: 97%;
+  float: none;
+  margin: 1rem;
+  box-sizing: border-box;
+}
+#studentDetailWrap #studentDetail .worksDitail .worksInfo {
+  width: calc(40% - 2rem);
+  margin: 2rem;
+  margin-top: 3.5rem;
+}
+#studentDetailWrap #studentDetail .worksDitail .worksInfo .studentWorkBtn {
+  position: relative;
+}
+#studentDetailWrap #studentDetail .worksDitail h3 {
+  font-size: 1.5rem;
+  color: #0F359D;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  position: relative;
+  padding: 1rem 1.1rem calc(1rem + 10px);
+  background: #e0f1ff;
+}
+#studentDetailWrap #studentDetail .worksDitail h3::before {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  width: 100%;
+  height: 100%;
+  content: "";
+  border: 2px solid #0F359D;
+}
+#studentDetailWrap #studentDetail .worksDitail pre {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  line-height: 2rem;
+  white-space: pre-wrap;
+  margin-bottom: 3rem;
+}
+#studentDetailWrap #studentDetail .worksDitail p:nth-of-type(1) {
+  margin-bottom: 3rem;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap .settionReserveWrap:nth-of-type(1) {
+  margin-bottom: 1.5rem;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div {
+  display: block;
+  border: none;
+  padding: 0rem;
+  margin-bottom: 0.5rem;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div h4 {
+  font-size: 1.4rem;
+  background-color: #0F359D;
+  color: #ffffff;
+  border-radius: 0rem;
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+  margin-top: 0rem;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div h4:nth-of-type(2) {
+  margin-top: 0;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div h4::before {
+  display: none;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul {
+  display: flex;
+  padding: 0.8rem 0.2rem 0.8rem 0.5rem;
+  background-color: #ededed;
+  border-radius: 0.5rem;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li {
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li:nth-of-type(1) {
+  width: calc(38px + 0.5rem);
+  padding-right: 0.5rem;
+  margin-right: 0.5rem;
+  border-right: solid #b0b0b0 1px;
+  font-size: 1.2rem;
+  color: #ff0000;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li:nth-of-type(1).freeTime {
+  color: #000000;
+  font-size: 1.3rem;
+  width: 75px;
+  /* margin: 0rem; */
+  margin-left: 49px;
+  padding-right: 0rem;
+  /* margin: 0rem; */
+  border-right: solid #b0b0b0 1px;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li:nth-of-type(1).freeTime + li {
+  width: calc(81px + 0.5rem);
+  padding-right: 0.5rem;
+  border-right: solid #b0b0b0 1px;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li:nth-of-type(1).freeTime + li + li {
+  width: auto;
+  font-size: 1.2rem;
+  border: none;
+  margin-right: 0.5rem;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li:nth-of-type(1).freeTime + li + li + li {
+  font-size: 1.25rem;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li:nth-of-type(1).freeTime + li + li + li span {
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li:nth-of-type(1).freeTime + li + li + li a {
+  color: #0174df;
+  text-decoration: underline;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li:nth-of-type(2) {
+  padding-right: 0.5rem;
+  margin-right: 0.5rem;
+  border-right: solid #b0b0b0 1px;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li:nth-of-type(3) {
+  width: calc(81px + 0.5rem);
+  margin-right: 0.5rem;
+  border-right: solid #b0b0b0 1px;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li:nth-of-type(4) {
+  font-size: 1.2rem;
+  margin-right: 0.7rem;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li:nth-of-type(5) {
+  font-size: 1.15rem;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li:nth-of-type(5) span {
+  font-size: 1.1rem;
+  margin-right: 0.5rem;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li:nth-of-type(5) a {
+  color: #0174df;
+  text-decoration: underline;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li button {
+  background-color: #2196F3;
+  color: #ffffff;
+  font-size: 1.1rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.3rem;
+  transition: 0.2s;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li button:hover {
+  background-color: #07163f;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li button[disabled=disabled] {
+  background-color: #686868;
+  color: #ffffff;
+}
+#studentDetailWrap #studentDetail .worksDitail .addSettionReserveWrap div ul li button[disabled=disabled]:hover {
+  background-color: #686868;
+}
+#studentDetailWrap #studentDetail .worksDitail p {
+  margin-bottom: 1rem;
+}
+#studentDetailWrap #studentDetail .worksDitail input[type=button] {
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  padding: 2.5rem;
+  background-color: #0F359D;
+}
+#studentDetailWrap #studentDetail .worksDitail input[type=button]:hover {
+  transition: 0.2s;
+  background-color: #09214f;
+}
+#studentDetailWrap #studentDetail .worksDitail .studentWorkBtn a {
+  color: #fff;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  padding: 2rem;
+  background-color: #0F359D;
+}
+#studentDetailWrap #studentDetail .worksDitail .studentWorkBtn a:hover {
+  transition: 0.2s;
+  background-color: #09214f;
+}
+#studentDetailWrap #studentDetail .worksDitail .studentContactBtn2, #studentDetailWrap #studentDetail .worksDitail .studentEvalutionBtn {
+  background-color: #fb8500;
+  position: relative;
+}
+#studentDetailWrap #studentDetail .worksDitail .studentContactBtn2:hover, #studentDetailWrap #studentDetail .worksDitail .studentEvalutionBtn:hover {
+  transition: 0.2s;
+  background-color: #582800;
+}
+#studentDetailWrap #studentDetail .worksDitail .studentContactBtn2 input[type=button], #studentDetailWrap #studentDetail .worksDitail .studentEvalutionBtn input[type=button] {
+  position: relative;
+  font-size: 1.5rem;
+  background: none;
+  z-index: 1000;
+}
+#studentDetailWrap #studentDetail .worksDitail .studentContactBtn2:before, #studentDetailWrap #studentDetail .worksDitail .studentEvalutionBtn:before {
+  position: absolute;
+  z-index: 110;
+  top: 9px;
+  left: 65%;
+  margin-left: 90px;
+  font-family: "Font Awesome 5 Free";
+  content: "\f164";
+  font-weight: 300;
+  font-size: 3.5rem;
+  color: rgba(0, 0, 0, 0.3);
+  transition: 0.2s;
+}
+#studentDetailWrap #studentDetail .worksDitail .studentContactBtn2:hover::before {
+  color: rgba(255, 255, 255, 0.5);
+  transform: rotate(-15deg);
+}
+#studentDetailWrap #studentDetail .worksDitail .studentEvalutionBtn {
+  background-color: #00a6f8;
+  margin-bottom: 3rem;
+}
+#studentDetailWrap #studentDetail .worksDitail .studentEvalutionBtn:hover {
+  transition: 0.2s;
+  background-color: #043953;
+}
+#studentDetailWrap #studentDetail .worksDitail .studentEvalutionBtn input[type=button] {
+  padding-top: 1.5rem;
+  padding-bottom: 3.5rem;
+  background: none;
+  z-index: 1000;
+}
+#studentDetailWrap #studentDetail .worksDitail .studentEvalutionBtn input[type=button]:hover {
+  background: none;
+}
+#studentDetailWrap #studentDetail .worksDitail .studentEvalutionBtn:before {
+  position: absolute;
+  z-index: 110;
+  top: 10px;
+  left: 65%;
+  margin-left: 90px;
+  font-family: "Font Awesome 5 Free";
+  content: "\f044";
+  font-weight: 400;
+  font-size: 3.5rem;
+  color: rgba(0, 0, 0, 0.3);
+}
+#studentDetailWrap #studentDetail .worksDitail .studentEvalutionBtn::after {
+  content: "『ピックアップリスト』に追加されます";
+  display: inline-block;
+  width: 55%;
+  text-align: center;
+  color: #fff;
+  font-size: 1.2rem;
+  position: absolute;
+  top: calc(50% + 1.5rem);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#studentDetailWrap #studentDetail .worksDitail .studentEvalutionBtn:hover::before {
+  color: rgba(255, 255, 255, 0.5);
+  transform: rotate(-15deg);
+}
+#studentDetailWrap #studentDetail .worksDitail h4 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #022D64;
+  background-color: #FDFF00;
+  padding: 1rem;
+  padding-bottom: 1.3rem;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+#studentDetailWrap #studentDetail .worksDitail h4:before {
+  position: absolute;
+  top: -3px;
+  left: -5px;
+  width: 100%;
+  height: 100%;
+  content: "";
+  border: 1px solid #022D64;
+}
+#studentDetailWrap #studentDetail .worksDitail table {
+  font-size: 1.4rem;
+  width: 100%;
+}
+#studentDetailWrap #studentDetail .worksDitail table th {
+  width: 40%;
+  font-size: 1.3rem;
+  padding: 2rem;
+  vertical-align: middle;
+  background-color: #0174df;
+  border: solid #0174df 1px;
+  color: #ffffff;
+}
+#studentDetailWrap #studentDetail .worksDitail table td {
+  width: 60%;
+  text-align: center;
+  border: solid #0174df 1px;
+}
+#studentDetailWrap #studentDetail .worksDitail table td.schoolNameToTel {
+  padding-top: 1rem;
+  padding-bottom: 0.3rem;
+  border-bottom: none;
+}
+#studentDetailWrap #studentDetail .worksDitail table td.schoolTel {
+  font-size: 1.5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 1rem;
+  border-top: none;
+}
+#studentDetailWrap #studentDetail .worksDitail table td.schoolTel span {
+  font-size: 1rem;
+}
+
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .contactRemove,
+#studentDetailWrap #studentDetail .worksDitail .contactRemove {
+  font-size: 1.5rem;
+  color: #000000;
+  background-color: #ffd000;
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .contactRemove:hover,
+#studentDetailWrap #studentDetail .worksDitail .contactRemove:hover {
+  transition: 0.2s;
+  background-color: #614f00;
+  color: #ffffff;
+}
+
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .contactRemove input#studentContactBtn,
+#studentDetailWrap #studentDetail .worksDitail .contactRemove input#studentContactBtn {
+  color: #000000;
+}
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .contactRemove input#studentContactBtn:hover,
+#studentDetailWrap #studentDetail .worksDitail .contactRemove input#studentContactBtn:hover {
+  color: #ffffff;
+}
+
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .contactRemove:before,
+#studentDetailWrap #studentDetail .worksDitail .contactRemove:before {
+  position: absolute;
+  z-index: 110;
+  top: 50%;
+  margin-top: -27px;
+  left: 64%;
+  font-family: "Font Awesome 5 Free";
+  content: "\f12d";
+  font-weight: 900;
+  font-size: 3.8rem;
+  color: rgba(0, 0, 0, 0.3);
+  transition: 0.2s;
+}
+
+#studentDetailWrap #studentDetail .studentContEvalBtnArea .contactRemove:hover::before,
+#studentDetailWrap #studentDetail .worksDitail .contactRemove:hover::before {
+  color: rgba(255, 255, 255, 0.5);
+  transform: rotate(0deg);
+  left: 65.5%;
+}/*# sourceMappingURL=studentDitail.css.map */

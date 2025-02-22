@@ -1,0 +1,2066 @@
+'use strict' 
+window.onpageshow = function(event) {
+	if (event.persisted) {
+		 window.location.reload();
+	}
+};
+
+const Spinner = window.VueSimpleSpinner;
+
+var app = new Vue({
+    el: '#app',
+    components: {
+      Spinner
+    },
+    data: {
+      judge_id:$.cookie("judge_id"),
+      judge_name:$.cookie("judge_name"),
+      company_id:$.cookie("company_id"),
+      company_name:$.cookie("company_name"),
+      // add フリーセッション予約出品番号　20250120
+      // freesession_exhibitcode1:'',
+      // freesession_exhibitcode2:'',
+      // freesession_exhibitcode3:'',
+      // freesession_exhibitcode4:'',
+      // freesession_exhibitcode5:'',
+      // freesession_exhibitcode6:'',
+      // freesession_exhibitcode7:'',
+      // freesession_exhibitcode8:'',
+      // end 20250120
+      //    message : 'Hello Vue!'
+      //    count : 0,
+      showSaleItem : false,
+      showDelvFree: false,
+      sortOrder : 1,
+//      products:[
+        // {student_id:'ohs99999', student_exhibitcode:'大阪IT001' , work_name:'１２３４５６７８９０１２', work_thumbnail:'0w.jpg',delv:0, work_overview: 'この作品はあああああ年度就職作品プレゼンテーション出展作品です。この作品は、ああああ年度就職作品プレゼンテーション出展作品です。',isContact:true},
+        // {student_id:'ohs11111', student_exhibitcode:'大阪IT002' , work_name:'１２３４５６７８９０１２', work_thumbnail:'0w.jpg',delv:0, work_overview: 'この作品はあああああ年度就職作品プレゼンテーション出展作品です。この作品は、ああああ年度就職作品プレゼンテーション出展作品です。',isContact:false},
+        // {student_id:'ohs22222', student_exhibitcode:'大阪IT003' , work_name:'１２３４５６７８９０１２', work_thumbnail:'0w.jpg',delv:0, work_overview: 'この作品はあああああ年度就職作品プレゼンテーション出展作品です。この作品は、ああああ年度就職作品プレゼンテーション出展作品です。',isContact:false},
+        // {student_id:'ohs33333', student_exhibitcode:'大阪IT004' , work_name:'１２３４５６７８９０１２', work_thumbnail:'0w.jpg',delv:0, work_overview: 'この作品はあああああ年度就職作品プレゼンテーション出展作品です。この作品は、ああああ年度就職作品プレゼンテーション出展作品です。',isContact:true},
+        // {student_id:'ohs44444', student_exhibitcode:'大阪IT005' , work_name:'１２３４５６７８９０１２', work_thumbnail:'0w.jpg',delv:0, work_overview: 'この作品はあああああ年度就職作品プレゼンテーション出展作品です。この作品は、ああああ年度就職作品プレゼンテーション出展作品です。'},
+        // {student_id:'ohs55555', student_exhibitcode:'大阪IT006' , work_name:'１２３４５６７８９０１２', work_thumbnail:'0w.jpg',delv:0, work_overview: 'この作品はあああああ年度就職作品プレゼンテーション出展作品です。この作品は、ああああ年度就職作品プレゼンテーション出展作品です。'},
+//      ],
+      products:[],
+      details:'',
+      contacts:[],
+      contacts_count:0,
+      // 20250120
+      freesession_schedules:{},
+      reservations:{
+        exhibitcode1:'',
+        exhibitcode2:'',
+        exhibitcode3:'',
+        exhibitcode4:'',
+        exhibitcode5:'',
+        exhibitcode6:'',
+        exhibitcode7:'',
+        exhibitcode8:''
+      },
+      // 20250120
+      searchSeveralyearsSelect:["4","2"],
+      searchSchoolnameSelect:[ "東京校", "大阪校", "名古屋校" ],
+      searchWorkplaceSelect_1:true,
+      searchWorkplaceSelect_2:true,
+      searchWorkplaceSelect_3:true,
+      searchWorkplaceSelect_4:true,
+      searchWorkSelect:[],
+      searchContactHidden:false,
+      searchAllCount:0,
+      //詳細情報
+      detailsIndex : 0,
+      detailsStudentId:'',
+      detailsStudentExhibitcode:'',
+      detailsContact:false,
+      //ポップアップ
+      showContent: false,
+      showDetails: false,
+      showContact: false,
+      showEvaluation: false,
+      isLoading: false,
+      //評価情報
+      evaluation:[],
+      evaluationIndex : 0,
+      evaluationStudentId:'',
+      evaluationStudentExhibitcode:'',
+      //evaluationStudentContact:false,
+      question_1_1:'',
+      question_1_2:'',
+      question_2_1:'',
+      question_2_2:'',
+      question_3_1:'',
+      question_3_2:'',
+      answer_1:'選択してください',
+      answer_2:'選択してください',
+      answer_3:'選択してください',     
+      answer_4:'',
+      answer:'',
+      evaluation_comment:'',
+      evaluation_comment_shushoku:'',
+      //非表示
+      evaluationDoneHidden:false,
+      //--------------
+      errorEvaluationComment:'',
+      //--------------  
+      //ページング
+                  // テストデータ
+                  // data: [''],
+                  // 表示ページ番号
+                  page: 1,
+                  // 1ページあたりの表示件数
+                  perPage: 52,
+                  // ページ
+                  pages: [],
+                  nowDisplayPage:1,
+       //--------------
+       //---通報関連
+       isReportSendDetails:false,
+       isReportSendEvaluation:false,
+       isSendCheckboxDisable:false,
+       offhours:true,
+       endhours:false,
+       freeesessionNow:0,
+       freeesessionButtonName:'',
+       judgeReservationHidden1:false,
+       judgeReservationHidden2:false,
+       judgeReservationHidden3:false,
+       judgeReservationHidden4:false,
+       judgeReservationHidden5:false,
+       judgeReservationHidden6:false,
+       judgeReservationHidden7:false,
+       judgeReservationHidden8:false,
+    },
+    beforeCreate: function(){
+      if(!$.cookie('judge_id')) {
+        location.href='/product';
+      }else{
+        this.judge_id=$.cookie('judge_id');
+      }
+    },
+    created() {
+      //--------------------------------------
+      this.contacts_count=this.contact_count_get();
+
+
+      //--------------------------------------
+
+    },
+    mounted(){
+      if(this.$cookies.isKey("searchValues")){  
+        this.searchSeveralyearsSelect = this.$cookies.get("searchValues").student_Severalyears;
+        this.searchSchoolnameSelect = this.$cookies.get("searchValues").student_schoolnames;
+        this.searchWorkplaceSelect_1 = this.$cookies.get("searchValues").preferred_workplace_1;
+        this.searchWorkplaceSelect_2 = this.$cookies.get("searchValues").preferred_workplace_2;
+        this.searchWorkplaceSelect_3 = this.$cookies.get("searchValues").preferred_workplace_3;
+        this.searchWorkplaceSelect_4 = this.$cookies.get("searchValues").preferred_workplace_4;
+        this.searchWorkSelect = this.$cookies.get("searchValues").work_typename;
+        this.searchContactHidden = this.$cookies.get("searchValues").searchContactHidden;
+        this.searchExecute();
+      }
+      var target = this;
+      // フリーセッション情報を取得する関数
+      function fetchFreeSessionSchedules() {
+        var url = `/freesession/schedules`;
+        return new Promise((resolve, reject) => {
+          $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            beforeSend: function(xhr, setting) {
+              target.isLoading = true;
+            },
+            success: function(data) {              
+              resolve(data);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+              reject(new Error('通信エラー'));
+            },
+            complete: function() {
+              target.isLoading = false;
+            }
+          });
+        });
+      }
+      // 審査員の予約状況を取得する関数
+      function fetchJudgeReservations(judge_id) {
+        var url = `/freesession/reservation/judges/${judge_id}`;
+        return new Promise((resolve, reject) => {
+          $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            beforeSend: function(xhr, setting) {
+              target.isLoading = true;
+            },
+            success: function(data) {
+              resolve(data);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+              reject(new Error('通信エラー'));
+            },
+            complete: function() {
+              target.isLoading = false;
+            }
+          });
+        });
+      }
+      // フリーセッション情報と審査員の予約状況を取得する処理
+      fetchFreeSessionSchedules()
+        .then(data => {
+          // フリーセッションの現在の回を取得（日時をDate型に変換））
+          console.log('???????????????');
+          console.log(data);
+          console.log('???????????????');
+          this.freesession_schedules = data.map(item => ({
+            schedule_no: item.schedule_no,
+            starttime: new Date(item.starttime),
+            endtime: new Date(item.endtime)
+          }));
+          console.log(this.freesession_schedules);
+          return fetchJudgeReservations(this.judge_id);
+          // return fetchJudgeReservations(this.judge_id);
+
+        })
+        .then(data => {
+          this.reservations.exhibitcode1 = data.freesession_exhibitcode1;
+          this.reservations.exhibitcode2 = data.freesession_exhibitcode2;
+          this.reservations.exhibitcode3 = data.freesession_exhibitcode3;
+          this.reservations.exhibitcode4 = data.freesession_exhibitcode4;
+          this.reservations.exhibitcode5 = data.freesession_exhibitcode5;
+          this.reservations.exhibitcode6 = data.freesession_exhibitcode6;
+          this.reservations.exhibitcode7 = data.freesession_exhibitcode7;
+          this.reservations.exhibitcode8 = data.freesession_exhibitcode8;
+          target.freesession_judgement();
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
+
+        // ５分に一回予約表示更新
+        setInterval(() => {
+          this.freesession_judgement();
+        }, 5 * 60 * 1000); // 5分 = 5 * 60秒 * 1000ミリ秒
+    },
+    watch:{
+      //---------------
+      //ページング
+        // データ更新に合わせてページ情報更新
+        products() {
+          this.setPages();
+        },
+      //---------------
+      isReportSendDetails:function(){
+
+      },
+      isReportSendEvaluation:function(){
+
+      },
+
+      showSaleItem: function(){
+        console.log('showSaleItemウォッチャが呼び出されました');
+      },
+      showDelvFree: function(){
+        console.log('showDelvFreeウォッチャが呼び出されました');
+      },
+      //--------------------------------------
+      searchSeveralyearsSelect:{
+        handler: function(){
+          this.errorSeveralyears;
+        },
+        deep:true
+      },
+      //--------------------------------------
+      //--------------------------------------
+      searchSchoolnameSelect:{
+        handler: function(){
+          this.errorSchoolname;
+        },
+        deep:true
+      },
+      //--------------------------------------
+      //--------------------------------------
+      searchWorkSelect:{
+        handler: function(){
+          this.errorWork;
+        },
+        deep:true
+      },
+      //--------------------------------------
+      answer_1:function(){
+        if(this.answer_1==''||this.answer_2==''||this.answer_3==''||this.answer_4==''){
+          this.errorEvaluationComment="評価を入力してください。（4項目）";
+        }else{
+          this.errorEvaluationComment="";
+        }
+      },
+      answer_2:function(){
+        if(this.answer_1==''||this.answer_2==''||this.answer_3==''||this.answer_4==''){
+          this.errorEvaluationComment="評価を入力してください。（4項目）";
+        }else{
+          this.errorEvaluationComment="";
+        }
+      },
+      answer_3:function(){
+        if(this.answer_1==''||this.answer_2==''||this.answer_3==''||this.answer_4==''){
+          this.errorEvaluationComment="評価を入力してください。（4項目）";
+        }else{
+          this.errorEvaluationComment="";
+        }
+      },
+      answer_4:function(){
+        if(this.answer_1==''||this.answer_2==''||this.answer_3==''||this.answer_4==''){
+          this.errorEvaluationComment="評価を入力してください。（4項目）";
+        }else{
+          this.errorEvaluationComment="";
+        }
+      },
+
+      //--------------------------------------
+
+
+    },
+    filters:{
+      array2string : function(array){
+        var array_str='';
+        for (const elem of array) {
+          array_str += elem +'/';
+        }
+        array_str = array_str.slice( 0, -1 ) ;
+        return array_str;
+      },
+      array2string_course : function(array){
+        var array_str='';
+        for (const elem of array) {
+          array_str += elem +'年制/';
+        }
+        array_str = array_str.slice( 0, -1 ) ;
+        return array_str;
+      }
+    },
+    computed:{
+      //--------------------------------------
+      // answer_11111:function(){
+//        alert('answer_1');
+      // },
+      //--------------------------------------
+      
+      evaluationCount: function(){
+        var count = 0;
+        for(var i=0; i < this.contacts.length; i++){
+          if(this.contacts[i].isEvaluation){
+            count++;
+          }
+        }
+        return count;
+      },
+      searchWorkplaces: function(){
+        // if(this.searchWorkplaceSelect_1 && this.searchWorkplaceSelect_2 && this.searchWorkplaceSelect_3 && this.searchWorkplaceSelect_4){
+        //   return "東京地区/大阪地区/名古屋地区/都市圏以外";
+        // }
+        var workplace_string = ''
+        if(this.searchWorkplaceSelect_1){workplace_string += '東京地区/';}
+        if(this.searchWorkplaceSelect_2){workplace_string += '大阪地区/';}
+        if(this.searchWorkplaceSelect_3){workplace_string += '名古屋地区/';}
+        if(this.searchWorkplaceSelect_4){workplace_string += '都市圏以外/';}
+        workplace_string = workplace_string.slice(0 , -1);
+        return workplace_string; 
+      },
+      // workplaces: function(placeSelect_1,placeSelect_2,placeSelect_3,placeSelect_4){
+      //   if(placeSelect_1 && placeSelect_2 && placeSelect_3 && placeSelect_4){
+      //     return "どこでも";
+      //   }
+      //   var workplace_string = ''
+      //   if(placeSelect_1){workplace_string += '東京地区/';}
+      //   if(placeSelect_2){workplace_string += '大阪地区/';}
+      //   if(placeSelect_3){workplace_string += '名古屋地区/';}
+      //   if(placeSelect_4){workplace_string += '都市圏以外/';}
+      //   workplace_string = workplace_string.slice(0 , -1);
+      //   return workplace_string;
+      // },
+//★
+      contactList: function(){
+        var newList = [];
+        for(var i=0; i < this.contacts.length; i++){
+          var isShow = true;
+          if(this.evaluationDoneHidden && this.contacts[i].isEvaluation){
+            isShow = false;
+          }
+          if(isShow){
+            newList.push(this.contacts[i]);
+          }
+        }
+
+        if(this.reservations.exhibitcode1 !== ''){
+          for(var i=0; i < newList.length; i++){
+            if(newList[i].student_exhibitcode === this.reservations.exhibitcode1){
+              newList[i].judge_reservation = `<span>予約済み</span>${ this.reservationDatetimeString(1,1) }`;
+              break;
+            }
+          }
+        }
+        if(this.reservations.exhibitcode2 !== ''){
+          for(var i=0; i < newList.length; i++){
+            if(newList[i].student_exhibitcode === this.reservations.exhibitcode2){
+              newList[i].judge_reservation = `<span>予約済み</span>${ this.reservationDatetimeString(1,2) }`;
+              break;
+            }
+          }
+        }
+        if(this.reservations.exhibitcode3 !== ''){
+          for(var i=0; i < newList.length; i++){
+            if(newList[i].student_exhibitcode === this.reservations.exhibitcode3){
+              newList[i].judge_reservation = `<span>予約済み</span>${ this.reservationDatetimeString(1,3) }`;
+              break;
+            }
+          }
+        }
+        if(this.reservations.exhibitcode4 !== ''){
+          for(var i=0; i < newList.length; i++){
+            if(newList[i].student_exhibitcode === this.reservations.exhibitcode4){
+              newList[i].judge_reservation = `<span>予約済み</span>${ this.reservationDatetimeString(1,4) }`;
+              break;
+            }
+          }
+        }
+        if(this.reservations.exhibitcode5 !== ''){
+          for(var i=0; i < newList.length; i++){
+            if(newList[i].student_exhibitcode === this.reservations.exhibitcode5){
+              newList[i].judge_reservation = `<span>予約済み</span>${ this.reservationDatetimeString(1,5) }`;
+              break;
+            }
+          }
+        }
+        if(this.reservations.exhibitcode6 !== ''){
+          for(var i=0; i < newList.length; i++){
+            if(newList.student_exhibitcode === this.reservations.exhibitcode6){
+              newList[i].judge_reservation = `<span>予約済み</span>${ this.reservationDatetimeString(1,6) }`;
+              break;
+            }
+          }
+        }
+        if(this.reservations.exhibitcode7 !== ''){
+          for(var i=0; i < newList.length; i++){
+            if(newList[i].student_exhibitcode === this.reservations.exhibitcode7){
+              newList[i].judge_reservation = `<span>予約済み</span>${ this.reservationDatetimeString(1,7) }`;
+              break;
+            }
+          }
+        }
+        if(this.reservations.exhibitcode8 !== ''){
+          for(var i=0; i < newList.length; i++){
+            if(newList[i].student_exhibitcode === this.reservations.exhibitcode8){
+              newList[i].judge_reservation = `<span>予約済み</span>${ this.reservationDatetimeString(1,8) }`;
+              break;
+            }
+          }
+        }
+
+
+
+        // if(this.sortOrder == 1){
+        //   // ものと順
+  
+        // }else if(this.sortOrder == 2){
+        //   newList.sort(function(a,b){
+        //     console.log('-------');
+        //     console.log('a:'+a.name + ' ' + a.price);
+        //     console.log('b:'+b.name + ' ' + b.price);
+        //     console.log('-------');
+        //     return a.price - b.price;
+        //   })
+        // }else if(this.sortOrder == 3){
+        //   newList.sort(function(a,b){
+        //     console.log('-------');
+        //     console.log('a:'+a.name + ' ' + a.price);
+        //     console.log('b:'+b.name + ' ' + b.price);
+        //     console.log('-------');
+        //     return b.price - a.price;
+        //   })
+        // }
+        return newList;
+      },
+      filteredList: function(){
+        var newList = [];
+        newList = this.products;
+        return newList;
+      },
+      count: function(){
+        return this.filteredList.length;
+      },
+      errorWorkplace: function(){
+        if(this.searchWorkplaceSelect_1 || this.searchWorkplaceSelect_2 || this.searchWorkplaceSelect_3 || this.searchWorkplaceSelect_4){
+          return '';
+        }
+        return '希望勤務地を選択してください';
+      },
+      errorSeveralyears: function(){
+        if(this.searchSeveralyearsSelect.length != 0){
+          return '';
+        }
+        return '4年制・2年制を選択してください';
+      },
+      errorSchoolname: function(){
+        if(this.searchSchoolnameSelect.length != 0){
+          return '';
+        }
+        return '所属校を選択してください';
+      },
+      errorWork: function(){
+        if(this.searchWorkSelect.length != 0){
+          return '';
+        }
+        return '作品種別を選択してください';
+      },
+      //----------------
+      //ページング
+              // 表示するテストデータを抽出
+              displayedData() {
+                return this.paginate(this.products);
+              },
+
+      //----------------
+      isButtonDisabled() {
+        const exhibitcodes = [
+            this.reservations.exhibitcode1,
+            this.reservations.exhibitcode2,
+            this.reservations.exhibitcode3,
+            this.reservations.exhibitcode4,
+            this.reservations.exhibitcode5,
+            this.reservations.exhibitcode6,
+            this.reservations.exhibitcode7,
+            this.reservations.exhibitcode8
+        ];
+        return exhibitcodes.includes(this.details.student_exhibitcode);
+      },
+      exhibitcodeMessage() {
+        const exhibitcodes = [
+            this.reservations.exhibitcode1,
+            this.reservations.exhibitcode2,
+            this.reservations.exhibitcode3,
+            this.reservations.exhibitcode4,
+            this.reservations.exhibitcode5,
+            this.reservations.exhibitcode6,
+            this.reservations.exhibitcode7,
+            this.reservations.exhibitcode8
+        ];
+
+        if (exhibitcodes.includes(this.details.student_exhibitcode)) {
+            if (this.reservations.exhibitcode1 === this.details.student_exhibitcode) {
+                return this.reservationDatetimeString(0,1);
+            } else if (this.reservations.exhibitcode2 === this.details.student_exhibitcode) {
+                return this.reservationDatetimeString(0,2);
+            } else if (this.reservations.exhibitcode3 === this.details.student_exhibitcode) {
+                return this.reservationDatetimeString(0,3);
+            } else if (this.reservations.exhibitcode4 === this.details.student_exhibitcode) {
+              return this.reservationDatetimeString(0,4);
+            } else if (this.reservations.exhibitcode5 === this.details.student_exhibitcode) {
+              return this.reservationDatetimeString(0,5);
+            } else if (this.reservations.exhibitcode6 === this.details.student_exhibitcode) {
+              return this.reservationDatetimeString(0,6);
+            } else if (this.reservations.exhibitcode7 === this.details.student_exhibitcode) {
+              return this.reservationDatetimeString(0,7);
+            } else if (this.reservations.exhibitcode8 === this.details.student_exhibitcode) {
+              return this.reservationDatetimeString(0,8);
+            }
+        }
+        return '';
+      }
+
+    },
+    methods:{
+      //---------------------
+      //ページング
+      // データの取得件数に応じてページ数を設定
+        setPages() {
+          this.pages=[];
+          this.page=1;
+          let numberOfPages = Math.ceil(this.products.length / this.perPage);
+          for (let index = 1; index <= numberOfPages; index++) {
+              this.pages.push(index);
+          }
+      },
+      // ページ番号に合わせてテストデータを抽出
+      paginate(products) {
+          let page = this.page;
+          this.nowDisplayPage =  this.page; 
+          let perPage = this.perPage;
+          let from = page * perPage - perPage;
+          let to = page * perPage;
+          return products.slice(from, to);
+      },
+      report_mail:function(){
+        var freesession_url = '';
+        var date_now = new Date();
+        for(let i=0;i<this.freesession_schedules.length;i++){
+          // 30分を加算          
+          let startTime =new Date(this.freesession_schedules[i].starttime - 30 * 60 * 1000);
+          if(startTime < date_now && date_now < this.freesession_schedules[i].endtime){
+            this.freeesessionNow = this.freesession_schedules[i].schedule_no;
+            switch (this.freeesessionNow ) {
+              case 1:
+                freesession_url = this.details.freesession_url1;
+                break;
+              case 2:
+                freesession_url = this.details.freesession_url2;
+                break;
+              case 3:
+                freesession_url = this.details.freesession_url3;
+                break;
+              case 4:
+                freesession_url = this.details.freesession_url4;
+                break;
+              case 5:
+                freesession_url = this.details.freesession_url5;
+                break;
+              case 6:
+                freesession_url = this.details.freesession_url6;
+                break;
+              case 7:
+                freesession_url = this.details.freesession_url7;
+                break;
+              case 8:
+                freesession_url = this.details.freesession_url8;
+                break;
+            }
+            break;
+          }
+        }        
+
+      //----通報ボダン--------
+        console.log('通報Buttonが押されました');
+        var url = '/report_mail';
+        var val = {
+          company_id:this.company_id,
+          company_name:this.company_name,
+          judge_id:this.judge_id,
+          judge_name:this.judge_name,
+          student_id:this.details.student_id,
+          student_exhibitcode:this.details.student_exhibitcode,
+          // student_nickname:this.details.student_nickname,
+          student_name:this.details.student_name,
+          // student_meetingId:this.details.student_meetingId,
+          work_group:this.details.work_group,
+          work_typename:this.details.work_typename,
+          work_name:this.details.work_name,
+          freesession_no:this.freeesessionNow,
+          freesession_url:freesession_url,
+        };
+        console.log(val);
+        $.ajax({
+          url : url,
+          data : val,
+          type : 'POST',
+          dataType : 'json',
+          // beforeSend: function(xhr, setting) {
+          //   target.isLoading = true
+          // }
+        })
+        .done(function(data,textStatus,xhr){
+          console.log(data);
+          this.isReportSendDetails=false,
+          this.isReportSendEvaluation=false
+        }.bind(this))
+        .fail(function(xhr, textStatus,errorThrown){
+          console.log('通信エラー');
+        }.bind(this))
+        .always(function(){
+        });
+      },
+
+      //---------------------
+
+      //検索開始
+      searchExecute: function(){
+        //--------
+        if(this.errorWorkplace!='' ||
+          this.errorSeveralyears!='' ||
+          this.errorSchoolname!='' ||
+          this.errorWork!='' ){ return };
+        //--------
+        var target = this;
+        this.showContent = false;
+        var url = '/students';
+        //alert(this.searchWorkSelect);
+        var val = {
+          preferred_workplace_1: this.searchWorkplaceSelect_1,
+          preferred_workplace_2: this.searchWorkplaceSelect_2,
+          preferred_workplace_3: this.searchWorkplaceSelect_3,
+          preferred_workplace_4: this.searchWorkplaceSelect_4,
+          student_Severalyears:this.searchSeveralyearsSelect,
+          student_schoolnames: this.searchSchoolnameSelect ,
+          work_typename: this.searchWorkSelect ,
+          //work_typename: "ITシステム",
+          searchContactHidden:this.searchContactHidden,
+          judge_id: this.judge_id
+        };
+
+        //CookieSet
+        this.$cookies.set("searchValues",val,30 * 60 * 60 * 24);
+
+        // var getCookie = this.$cookies.get("searchValues");
+        // console.log(getCookie);
+        // console.log(getCookie.student_Severalyears);
+
+        $.ajax({
+          url : url,
+          data : val,
+          type : 'GET',
+          dataType : 'json',
+          beforeSend: function(xhr, setting) {
+            target.isLoading = true
+          }
+        })
+        .done(function(data,textStatus,xhr){
+          console.log(data);
+          //2.1add
+          //ランダムソート
+          // for(var i = data.search.length - 1; i > 0; i--){
+          //   var r = Math.floor(Math.random() * (i + 1));
+          //   var tmp = data.search[i];
+          //   data.search[i] = data.search[r];
+          //   data.search[r] = tmp;
+          // }
+          // end
+          this.products = data.search;
+          this.searchAllCount = data.count
+
+          // $ref
+          // console.log(this.$refs);
+          // console.log("#######");
+          // console.log(this.$refs["大阪AT091"]);
+          // console.log("#######");
+        
+          this.$nextTick(function(){
+            if(this.$cookies.isKey("detailViews")){ 
+              // var getCookieDetailViewsData = this.$cookies.get("detailViews").getCookieDetailViews;
+              // for (const elem of getCookieDetailViewsData) {
+              //   console.log(elem);
+              //   document.getElementById(elem).classList.add("detailViews");
+              //   console.log(document.getElementById(elem));
+              // }
+              var getCookieDetailViewsData = this.$cookies.get("detailViews").getCookieDetailViews;
+              for (const elem of getCookieDetailViewsData) {
+                //   console.log(this.products);
+                //   document.getElementById(elem).classList.add("detailViews");
+                //   console.log(document.getElementById(elem));
+                for(const item of this.products){
+                  if(item.student_exhibitcode === elem){
+                    item.detailViews = true;
+                    break;
+                  }
+                }
+              }
+            }
+          });
+
+
+
+          //
+
+        }.bind(this))
+        .fail(function(xhr, textStatus,errorThrown){
+          console.log('通信エラー');
+        }.bind(this))
+        .always(function(){
+          target.isLoading = false;
+        }.bind(this));
+      },
+
+      //--------------------------------------
+      //--------------------------------------
+      workplaces:function(val1,val2,val3,val4){
+        if(val1 && val2 && val3 && val4){
+          return "どこでも";
+        }
+        var workplace_string = ''
+        if(val1){workplace_string += '東京地区/';}
+        if(val2){workplace_string += '大阪地区/';}
+        if(val3){workplace_string += '名古屋地区/';}
+        if(val4){workplace_string += '都市圏以外/';}
+        workplace_string = workplace_string.slice(0 , -1);
+        return workplace_string;
+      },
+      openModal: function(){
+        console.log('hit')
+        this.showContent = true
+      },
+      closeModal: function(){
+        this.showContent = false;
+      },
+      //詳細情報取得&ウインドウ表示
+      openDetailsModal: function(index,id,exhibitcode,contact){
+        
+        //alert(typeof contact);
+        this.detailsIndex = index;
+        this.detailsStudentId = id;
+        this.detailsStudentExhibitcode = exhibitcode;
+        this.detailsContact = Boolean(contact);
+//        this.showDetails = true;
+        var target = this;
+        this.showContent = false;
+        var url = '/students/'+exhibitcode;
+        var val = {
+          student_id: id,
+          judge_id:this.judge_id
+        };
+        console.log(url);
+        $.ajax({
+          url : url,
+          data : val,
+          type : 'GET',
+          dataType : 'json',
+          beforeSend: function(xhr, setting) {
+            target.isLoading = true
+          }
+        })
+        .done(function(data,textStatus,xhr){
+          console.log(data);
+          this.details = data;
+          this.showDetails = true;
+          // var date_now = new Date();
+          // var date_start = new Date(presentation_period_starts); //月は-1
+          //              var date_start = new Date(2022, 2, 18, 0, 0, 0); //月は-1
+          // if(date_now < date_start){
+          //   console.log('時間外');
+          //   this.offhours = false;
+          //   this.isSendCheckboxDisable = true;
+          // }else{
+          //   console.log('時間内');
+          //   this.offhours = true;
+          //   this.isSendCheckboxDisable = false;
+          // }
+          
+          //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+          this.freesession_judgement();
+          // フリーセッションの日付か確認
+          // let startDate = new Date(this.freesession_schedules[0].starttime);
+          // startDate.setHours(0, 0, 0)
+          // let endDate = new Date(this.freesession_schedules[this.freesession_schedules.length-1].endtime);
+          // endDate.setHours(23, 59, 59)
+          // var date_now = new Date();
+          // console.log('日時計算');
+          // console.log(startDate);
+          // console.log(endDate);
+          // console.log(date_now);
+          // console.log('日時計算');
+          
+          // // フリーセッションの日付表示
+          // this.freeesessionNow = 0;
+          // this.freeesessionButtonName = ``;
+          // if(date_now < startDate){
+          //   console.log('フリーセッション前日まで');
+          //   this.offhours = true;
+          //   this.isSendCheckboxDisable = true;
+          //   this.freeesessionButtonName = `フリーセッションは${ startDate.getDate() }日〜${ endDate.getDate() }日に実施します。 しばらくお待ちください。`;   
+          // }else if(date_now < this.freesession_schedules[0].starttime - 30 * 60 * 1000){
+          //   this.offhours = false;
+          //   this.isSendCheckboxDisable = true;  
+            
+          //   for(let i=0;i<this.freesession_schedules.length;i++){
+          //     // 既存のDateオブジェクト
+          //     console.log(this.freesession_schedules[i].starttime);
+          //     console.log(this.freesession_schedules[i].endtime);
+          //   }
+          //   console.log("freesession_schedules[0].starttime:" & this.freesession_schedules[0].starttime)
+          //   console.log(this.freesession_schedules[0].starttime.getHours());
+          //   console.log(this.freesession_schedules[0].starttime.getMinutes());
+          //   console.log(this.freesession_schedules[0].starttime);
+          //   // 既存のDateオブジェクト
+          //   let startTime = this.freesession_schedules[0].starttime;
+          //   // 時と分をゼロ埋め
+          //   let hours = String(startTime.getHours()).padStart(2, '0');
+          //   let minutes = String(startTime.getMinutes()).padStart(2, '0');
+          //   // フォーマットを適用
+          //   this.freeesessionButtonName = `${hours}:${minutes}からフリーセッションを開始します。しばらくお待ちください。`;;
+          // }else if(date_now < this.freesession_schedules[this.freesession_schedules.length-1].endtime){
+          //   this.offhours = false;
+          //   this.isSendCheckboxDisable = false;  
+          //   // if(date_now < (this.freesession_schedules[0].starttime - 30 * 60 * 1000)){
+          //     for(let i=0;i<this.freesession_schedules.length;i++){
+          //       // 既存のDateオブジェクト
+          //       let startTime = this.freesession_schedules[i].starttime;
+          //       // 30分を加算
+          //       startTime.setMinutes(startTime.getMinutes()  - 30 * 60 * 1000);
+          //       if(startTime < date_now && date_now < this.freesession_schedules[i].endtime){
+          //         console.log("freesession_schedules[i].schedule_no:" & this.freesession_schedules[i].schedule_no)
+          //         this.freeesessionNow = this.freesession_schedules[i].schedule_no;
+          //         //this.freeesessionButtonName = `${this.freesession_schedules[i].starttime.getDate()}日${this.freesession_schedules[i].starttime.getHours()}:${this.freesession_schedules[i].starttime.getMinutes()}〜${this.freesession_schedules[i].endtime.getDate()}日${this.freesession_schedules[i].endtime.getHours()}:${this.freesession_schedules[i].endtime.getMinutes()}のフリーセッションに参加する。`;
+          //         // 既存のDateオブジェクト
+          //         let startDatetime = this.freesession_schedules[i].starttime;
+          //         let endDatetime = this.freesession_schedules[i].endtime;
+
+          //         // 日付、時、分をゼロ埋め
+          //         let startDay = String(startDatetime.getDate()).padStart(2, '0');
+          //         let startHours = String(startDatetime.getHours()).padStart(2, '0');
+          //         let startMinutes = String(startDatetime.getMinutes()).padStart(2, '0');
+
+          //         let endDay = String(endDatetime.getDate()).padStart(2, '0');
+          //         let endHours = String(endDatetime.getHours()).padStart(2, '0');
+          //         let endMinutes = String(endDatetime.getMinutes()).padStart(2, '0');
+
+          //         // フォーマットを適用
+          //         this.freeesessionButtonName = `${startDay}日${startHours}:${startMinutes}〜${endDay}日${endHours}:${endMinutes}のフリーセッションに参加する。`;
+                  
+          //         break;
+          //       }
+          //     //}
+          //   }
+          // }else{
+          //   console.log('フリーセッション終了後　');
+          //   this.offhours = true;
+          //   this.isSendCheckboxDisable = true;
+          //   this.freeesessionButtonName = `フリーセッションは終了しました。ご参加いただきありがとうございました。`;
+          //     // 既存のDateオブジェクト
+          // }
+          //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+          //CookieSet
+          console.log("↓↓↓↓↓↓↓↓↓↓↓↓");
+          if(this.$cookies.isKey("detailViews")){ 
+            var getCookieDetailViewsData = this.$cookies.get("detailViews").getCookieDetailViews;
+            
+            var flg = true;
+            for (const elem of getCookieDetailViewsData) {
+              if(elem===this.detailsStudentExhibitcode){
+                flg = false;
+                break;
+              };
+            }
+            if(flg){
+              //document.getElementById(this.detailsStudentExhibitcode).classList.add("detailViews");
+              
+              for(const item of this.products){
+                if(item.student_exhibitcode === this.detailsStudentExhibitcode){
+                  item.detailViews = true;
+                  break;
+                }
+              }              
+              
+              getCookieDetailViewsData.push(this.detailsStudentExhibitcode);
+              var setValues = {
+                getCookieDetailViews:getCookieDetailViewsData
+              }
+              console.log(getCookieDetailViewsData);
+              this.$cookies.set("detailViews",setValues,30 * 60 * 60 * 24);
+            }
+          }else{
+            for(const item of this.products){
+              if(item.student_exhibitcode === this.detailsStudentExhibitcode){
+                item.detailViews = true;
+                break;
+              }
+            }              
+            var setValues = {
+              getCookieDetailViews:[this.detailsStudentExhibitcode]
+            }
+            this.$cookies.set("detailViews",setValues,30 * 60 * 60 * 24);
+
+          }
+
+          // console.log("===========");
+          // console.log(typeof getCookieDetailViews);
+          // console.log("===========");
+          // console.log("↑↑↑↑↑↑↑↑↑↑↑↑");
+
+        }.bind(this))
+        .fail(function(xhr, textStatus,errorThrown){
+          console.log('通信エラー');
+        }.bind(this))
+        .always(function(){
+          target.isLoading = false;
+        });
+      },
+
+//--------------------------------------
+
+    openEvaluation2ReservationDetailsModal: function(exhibitcode){
+      if(this.offhours){
+        this.showDetails = true;
+        this.showContact = false;
+        this.showEvaluation = false;
+      }
+      this.openReservationDetailsModal(exhibitcode);
+    },
+    
+
+      //予約詳細情報取得&ウインドウ表示
+      openReservationDetailsModal: function(exhibitcode){
+        this.contacts_count=this.contact_count_get();
+        // ★this.showContact = false;
+
+        //alert(typeof contact);
+        // this.detailsIndex = index;
+        // this.detailsStudentId = id;
+        this.detailsStudentExhibitcode = exhibitcode;
+        // this.detailsContact = Boolean(contact);
+        
+        // this.showDetails = true;
+        
+        var target = this;
+        this.showContent = false;
+        var url = '/students/'+exhibitcode;
+        var val = {
+          // student_id: id,
+          judge_id:this.judge_id
+        };
+        console.log(url);
+        $.ajax({
+          url : url,
+          data : val,
+          type : 'GET',
+          dataType : 'json',
+          beforeSend: function(xhr, setting) {
+            target.isLoading = true
+          }
+        })
+        .done(function(data,textStatus,xhr){
+          this.details = data;
+          console.log('$$$$$$$$$$$openReservationDetailsModal$$$$$$$$$$');
+          console.log(this.details);
+          console.log(data.isContact);
+          console.log(this.details.isContact);
+          console.log(this.detailsContact);
+          console.log('$$$$$$$$$$$openReservationDetailsModal$$$$$$$$$$');
+          if(this.offhours){
+            //----セッション時間外処理------------
+            this.detailsStudentId = data.student_id;
+            this.detailsContact = Boolean(data.isContact);
+            this.showDetails = true;
+            // 20250202
+            this.showContact = false;
+            this.showEvaluation = false;
+            this.errorEvaluation='';
+            // 20250202 end
+            this.freesession_judgement();
+          }else{
+            //----セッション時間内処理------------
+            console.log('----セッション時間内処理----');
+            console.log(data);
+            console.log(data.isContact);
+            console.log('----セッション時間内処理----');
+            this.openDirectEvaluationModal(data,data.student_id,exhibitcode,data.isContact)
+            console.log('----どっちが早く実行される？----');
+
+          }
+        }.bind(this))
+        .fail(function(xhr, textStatus,errorThrown){
+          console.log('通信エラー');
+        }.bind(this))
+        .always(function(){
+          target.isLoading = false;
+        });
+      },
+//--------------------------------------
+      //詳細表示を閉じる
+      closeDetailsModal: function(){
+        console.log('click');
+        this.showDetails = false;
+      },
+      //contactチェンジ
+      contactChange: function(){
+        console.log('contactChange')
+        //detailsContact
+        var method;
+        if(this.detailsContact == true){
+          //削除
+          console.log('DELETE');
+          method = 'DELETE';
+//          this.products[this.detailsIndex].isContact = false;
+          this.detailsIndex.isContact = false;
+          this.details.isContact = false;
+          this.detailsContact = false;
+          this.contacts_count--;
+        }else{
+          //登録
+          console.log('POST');
+          method = 'POST'
+//          this.products[this.detailsIndex].isContact = true;
+          this.detailsIndex.isContact = true;
+          this.details.isContact = true;
+          this.detailsContact = true;
+          this.contacts_count++;
+        }
+        var url = '/contacts/'+ this.detailsStudentExhibitcode;
+        var val = {
+          judge_id:this.judge_id,
+//          judge_name:this.judge_name,
+//          company_id:this.company_id,
+//          company_name:this.company_name,
+          student_id:this.detailsStudentId,
+          student_exhibitcode:this.detailsStudentExhibitcode
+        };
+        $.ajax({
+          url : url,
+          data : val,
+          type : method,
+          dataType : 'json',
+          // beforeSend: function(xhr, setting) {
+          //   target.isLoading = true
+          // }
+        })
+        .done(function(data,textStatus,xhr){
+          console.log(data);
+          // this.details = data;
+        }.bind(this))
+        .fail(function(xhr, textStatus,errorThrown){
+          console.log('通信エラー');
+        }.bind(this))
+        .always(function(){
+          // target.isLoading = false;
+        });
+      },
+      //Contactポップアップ表示を閉じる
+      openContactModal: function(){
+        var target = this;
+        var url = '/contacts/'+this.judge_id;
+        var val = {
+        };
+        $.ajax({
+          url : url,
+//          data : val,
+          type : 'GET',
+          dataType : 'json',
+          beforeSend: function(xhr, setting) {
+            target.isLoading = true
+          }
+        })
+        .done(function(data,textStatus,xhr){
+          console.log(data);
+          this.contacts = data;
+          this.contacts_count = this.contacts.length;
+        }.bind(this))
+        .fail(function(xhr, textStatus,errorThrown){
+          console.log('通信エラー');
+        }.bind(this))
+        .always(function(){
+          target.isLoading = false;
+        });
+
+        this.showContact = true;
+      },
+      //Contactポップアップ表示を閉じる
+      closeContactModal: function(){
+        this.showContact = false;
+      },
+      //サインアウト
+      signout: function(){
+        $.removeCookie("judge_id");
+        $.removeCookie("judge_name");
+        $.removeCookie("company_id");
+        $.removeCookie("company_name");
+        sessionStorage.removeItem('signin_data'); // sessionStorageをクリア
+
+        location.href='/product';
+      },
+      //直接評価
+      openDirectEvaluationModal: function(index,id,exhibitcode,contact){
+        //this.contactChange();
+        //----直接評価の場合のcontact加算-----
+        // if(!this.contact){
+        if(!contact){
+          //if(!this.evaluationStudentContact){
+          this.detailsIndex.isContact = true;
+          this.details.isContact = true;
+          this.detailsContact = true;
+            //this.contacts_count++;
+          var url = '/contacts/'+ exhibitcode;
+          var val = {
+            judge_id:this.judge_id,
+            student_id:this.detailsStudentId,
+            student_exhibitcode:this.detailsStudentExhibitcode
+          };
+          $.ajax({
+            url : url,
+            data : val,
+            type : 'POST',
+            dataType : 'json',
+            // beforeSend: function(xhr, setting) {
+            //   target.isLoading = true
+            // }
+          })
+          .done(function(data,textStatus,xhr){
+            console.log(data);
+            // this.details = data;
+          }.bind(this))
+          .fail(function(xhr, textStatus,errorThrown){
+            console.log('contact-count通信エラー');
+          }.bind(this))
+          .always(function(){
+            // target.isLoading = false;
+          });
+        }
+
+        //---------
+        // }
+        this.openEvaluationModal(index,id,exhibitcode);
+        // 評価Back後、詳細表示
+        // this.showDetails = false;
+      },
+
+      openEvaluationModal: function(index,id,exhibitcode){
+        // console.log(index);
+        console.log(id);
+        console.log(exhibitcode);
+        this.evaluationIndex = index;
+        this.evaluationStudentId = id;
+        this.evaluationStudentExhibitcode = exhibitcode;
+        //this.evaluationStudentContact = contact;
+        // this.detailsContact = contact;
+        // this.showEvaluation = true;
+        var target = this;
+        // this.showContent = false;
+        var url = '/students/'+exhibitcode;
+        var val = {
+           student_id: id,
+           judge_id:this.judge_id
+        };
+        var method = 'GET';
+
+        //async function gatData(url,val,method){
+
+          function gatData(url,val,method) {
+            console.log('---gatData---');
+            console.log(url);
+            console.log(val);
+            console.log(method);
+            console.log('---gatData---');
+            return ajax(url,val,method).then(a => {
+//              var date_now = new Date();
+              console.log("##########")
+              console.log(presentation_period_starts)
+              console.log("##########")
+//               var date_start = new Date(presentation_period_starts); //月は-1
+// //              var date_start = new Date(2022, 2, 18, 0, 0, 0); //月は-1
+//               if(date_now < date_start){
+//                 target.offhours = false;
+//               }else{
+//                 target.offhours = true;
+//               }    
+    
+              target.showEvaluation = true;
+              //作品詳細情報取得
+    //          var a = await ajax(url,val,method);
+              target.evaluation = a;
+              // 20250203 add
+              target.details = a;
+              // 20250203
+
+              var url = '/evaluation';
+              var val ={
+                work_typename : a.work_typename 
+              };
+              //評価項目取得
+              //var b = await ajax(url,val,method);
+              return ajax(url,val,method).then(b => {          
+                target.question_1_1 = b.question_1_1;
+                target.question_1_2 = b.question_1_2;
+                target.question_2_1 = b.question_2_1;
+                target.question_2_2 = b.question_2_2;
+                target.question_3_1 = b.question_3_1;        
+                target.question_3_2 = b.question_3_2;          
+                return 'FINISH';
+
+              });
+            });
+        }
+        console.log('---gatData2---');
+        console.log(url);
+        console.log(val);
+        console.log(method);
+        console.log('---gatData2---');    
+        gatData(url,val,method).then(v => {
+          console.log('End:'+v);
+        });
+        //採点者別評価情報取得
+        var url = '/evaluation/'+exhibitcode;
+        console.log(url);
+        var val = {
+          student_id: id,
+          judge_id : this.judge_id
+        };
+        $.ajax({
+          url : url,
+          data : val,
+          type : 'GET',
+          dataType : 'json',
+          beforeSend: function(xhr, setting) {
+             target.isLoading = true
+           }
+         })
+        .done(function(data,textStatus,xhr){
+           //this.evaluation = data;
+          //  data.work_typename
+          //var data =　ajax(url,val,method);
+          console.log('評価取得後');
+          console.log(data.answer_1);
+          if(data.answer_1 != undefined){
+            console.log('更新');            
+            target.answer_1 = data.answer_1;
+            target.answer_2 = data.answer_2;
+            target.answer_3 = data.answer_3;
+            target.answer_4 = data.answer_4;
+            target.evaluation_comment = data.comment;
+            target.evaluation_comment_shushoku = data.comment_shushoku;
+            target.answer = 'PUT'; 
+          }else{
+            console.log('新規');            
+            target.answer = 'POST'; 
+            target.answer_1 = '';
+            target.answer_2 = '';
+            target.answer_3 = '';
+            target.answer_4 = '';
+            target.evaluation_comment = '';
+            target.evaluation_comment_shushoku = '';
+          }
+          // 追加 20250126
+          this.freesession_judgement();
+
+        }.bind(this))
+         .fail(function(xhr, textStatus,errorThrown){
+           console.log('ANSWER通信エラー');
+         }.bind(this))
+         .always(function(){
+          target.isLoading = false;
+         });
+      },
+      //作品評価へリンクが押された場合（ギブアップ！！！）
+    //   openReservationEvaluationModal: function(exhibitcode,contact){
+    //     console.log('@@@@@@@@@@@@openReservationEvaluationModal@@@@@@@@@@@@');
+    //     console.log(exhibitcode);
+    //     console.log('@@@@@@@@@@@@openReservationEvaluationModal@@@@@@@@@@@@');
+    //     console.log(this.reservations.exhibitcode2);
+    //     console.log(this.details.student_exhibitcode);
+    //     console.log('@@@@@@@@@@@@openReservationEvaluationModal@@@@@@@@@@@@');
+    //     this.detailsStudentExhibitcode = exhibitcode;
+    //     var target = this;
+    //     var url = '/students/' + exhibitcode + '/student_id';
+    //     var val = {
+    //        judge_id: this.judge_id
+    //     };
+    //     var method = 'GET';
+    //     function getStudentId(url, method) {
+    //         return new Promise((resolve, reject) => {
+    //             $.ajax({
+    //                 url: url,
+    //                 type: method,
+    //                 dataType: 'json',
+    //             })
+    //             .done((data, textStatus, xhr) => {
+    //                 console.log('getStudentId');
+    //                 console.log(data);
+    //                 if (data.length > 0) {
+    //                     resolve(data[0].student_id);
+    //                 } else {
+    //                     reject('No student_id found');
+    //                 }
+    //             })
+    //             .fail((xhr, textStatus, errorThrown) => {
+    //                 console.log('getStudentId通信エラー');
+    //                 reject(errorThrown);
+    //             });
+    //         });
+    //     }
+    
+    //     function gatData(url, val, method) {
+    //         console.log('---gatData---');
+    //         console.log(url);
+    //         console.log(val);
+    //         console.log(method);
+    //         console.log('---gatData---');
+    //         return ajax(url, val, method).then(a => {
+    //             var date_now = new Date();
+    //             console.log("##########")
+    //             console.log(a)
+    //             console.log("##########")
+    //             target.freesession_judgement();
+    
+    //             target.showEvaluation = true;
+    //             target.evaluation = a;
+    //             console.log('**********target.evaluation=a**********')
+    //             console.log(target.evaluation)
+    //             console.log('**********target.evaluation=a**********')
+    //             var url = '/evaluation';
+    //             var val = {
+    //                 work_typename: a.work_typename 
+    //             };
+    //             return ajax(url, val, method).then(b => {          
+    //                 target.question_1_1 = b.question_1_1;
+    //                 target.question_1_2 = b.question_1_2;
+    //                 target.question_2_1 = b.question_2_1;
+    //                 target.question_2_2 = b.question_2_2;
+    //                 target.question_3_1 = b.question_3_1;        
+    //                 target.question_3_2 = b.question_3_2;          
+                    
+    //                 console.log('target.evaluation')
+    //                 console.log(target.evaluation)
+    //                 console.log(target.evaluation.freesession_count1)
+    //                 console.log('target.evaluation')
+    //                 return 'FINISH';
+    //             });
+    //         });
+    //     }
+    
+    //     console.log('---getStudentId送信前---');
+    //     console.log(url);
+    //     console.log(method);
+    //     console.log('---getStudentId送信前---');    
+    
+    //     getStudentId(url, method).then(student_id => {
+    //         console.log('取得したstudent_id:', student_id);
+    
+    //         // 採点者別評価情報取得
+    //         var evalUrl = '/evaluation/' + exhibitcode;
+    //         console.log(evalUrl);
+    //         var evalVal = {
+    //             student_id: student_id,
+    //             judge_id: this.judge_id
+    //         };
+    //         $.ajax({
+    //             url: evalUrl,
+    //             data: evalVal,
+    //             type: 'GET',
+    //             dataType: 'json',
+    //             beforeSend: function(xhr, setting) {
+    //                 target.isLoading = true
+    //             }
+    //         })
+    //         .done(function(data, textStatus, xhr){
+    //             console.log('評価取得後');
+    //             console.log(data.answer_1);
+    //             if(data.answer_1 != undefined){
+    //                 console.log('更新');            
+    //                 target.answer_1 = data.answer_1;
+    //                 target.answer_2 = data.answer_2;
+    //                 target.answer_3 = data.answer_3;
+    //                 target.answer_4 = data.answer_4;
+    //                 target.evaluation_comment = data.comment;
+    //                 target.evaluation_comment_shushoku = data.comment_shushoku;
+    //                 target.answer = 'PUT'; 
+    //             } else {
+    //                 console.log('新規');            
+    //                 target.answer = 'POST'; 
+    //                 target.answer_1 = '';
+    //                 target.answer_2 = '';
+    //                 target.answer_3 = '';
+    //                 target.answer_4 = '';
+    //                 target.evaluation_comment = '';
+    //                 target.evaluation_comment_shushoku = '';
+    //             }
+    //         }.bind(this))
+    //         .fail(function(xhr, textStatus, errorThrown){
+    //             console.log('ANSWER通信エラー');
+    //         }.bind(this))
+    //         .always(function(){
+    //             target.isLoading = false;
+    //         });
+    
+    //         // 評価データ取得
+    //         console.log('---gatData999---');
+    //         console.log(exhibitcode);
+    //         var evalDataUrl = '/students/' + exhibitcode;
+    //         var evalDataVal = {
+    //             judge_id: this.judge_id
+    //         };
+    //         gatData(evalDataUrl, evalDataVal, method).then(v => {
+    //             console.log('End:' + v);
+    //         }).catch(err => {
+    //             console.error('Error:', err);
+    //         });
+
+    //         // contact処理
+    //         if(!contact){
+    //           // this.detailsIndex.isContact = true;
+    //           // this.details.isContact = false;
+    //           // this.detailsContact = true;
+    //           var url = '/contacts/'+ this.evaluation.student_exhibitcode;
+    //           var val = {
+    //           judge_id:this.judge_id,
+    //           student_id:this. evaluation.student_id,
+    //           student_exhibitcode:this.evaluation.student_exhibitcode
+    //         };
+    //         $.ajax({
+    //           url : url,
+    //           data : val,
+    //           type : 'POST',
+    //           dataType : 'json',
+    //           // beforeSend: function(xhr, setting) {
+    //           //   target.isLoading = true
+    //           // }
+    //         })
+    //         .done(function(data,textStatus,xhr){
+    //           console.log(data);
+    //           this.evaluation.isContact=true;
+    //           // this.details = data;
+    //         }.bind(this))
+    //         .fail(function(xhr, textStatus,errorThrown){
+    //           console.log('contact-count通信エラー');
+    //         }.bind(this))
+    //         .always(function(){
+    //           // target.isLoading = false;
+    //         });
+    //       }
+
+    //       // 追加 20250126
+
+    //               //     // 新しい処理を追加
+    //     //     var reservationUrl = `/freesession/reservation/judges/${ this.judge_id }`;
+    //     //     $.ajax({
+    //     //         url: reservationUrl,
+    //     //         type: 'GET',
+    //     //         dataType: 'json',
+    //     //         beforeSend: function(xhr, setting) {
+    //     //             target.isLoading = true
+    //     //         }
+    //     //     })
+    //     //     .done(function(data, textStatus, xhr){
+    //     //         // console.log('###############');
+    //     //         // console.log(data);
+    //     //         // console.log('###############');
+    //     //         // target.reservations.exhibitcode1 = data.freesession_exhibitcode1;
+    //     //         // target.reservations.exhibitcode2 = data.freesession_exhibitcode2;
+    //     //         // target.reservations.exhibitcode3 = data.freesession_exhibitcode3;
+    //     //         // target.reservations.exhibitcode4 = data.freesession_exhibitcode4;
+    //     //         // target.reservations.exhibitcode5 = data.freesession_exhibitcode5;
+    //     //         // target.reservations.exhibitcode6 = data.freesession_exhibitcode6;
+    //     //         // target.reservations.exhibitcode7 = data.freesession_exhibitcode7;
+    //     //         // target.reservations.exhibitcode8 = data.freesession_exhibitcode8;
+    //     //         // console.log('AAA###############');
+    //     //         // console.log(target.reservations);
+    //     //         // console.log('###############');
+    
+    //     //     }.bind(this))
+    //     //     .fail(function(xhr, textStatus, errorThrown){
+    //     //         console.log('通信エラー');
+    //     //     }.bind(this))
+    //     //     .always(function(){
+    //     //         target.isLoading = false;
+    //     //     });
+    //     //     // 追加 20250126
+    //     //     this.freesession_judgement();
+    //     // }).catch(err => {
+    //     //     console.error('Error:', err);
+    //     // });
+    //         // 追加 20250126
+    //         this.freesession_judgement();
+    //     }).catch(err => {
+    //         console.error('Error:', err);
+    //     });
+
+    // },
+    closeEvaluationModal: function(){
+        //---閉じた時にcontact数を取得-----------------------------------
+        this.contacts_count=this.contact_count_get();
+
+  //       var target = this;
+  //       var url = '/contacts/'+this.judge_id+'/count';
+  //       var val = {
+  //       };
+  //       $.ajax({
+  //         url : url,
+  // //          data : val,
+  //         type : 'GET',
+  //         dataType : 'json',
+  //         beforeSend: function(xhr, setting) {
+  //           target.isLoading = true
+  //         }
+  //       })
+  //       .done(function(data,textStatus,xhr){
+  //         console.log(data);
+  // //        this.contacts = data;
+  // //        this.contacts_count = this.contacts.length;
+  //         this.contacts_count = data.contact_count_all;
+
+  //       }.bind(this))
+  //       .fail(function(xhr, textStatus,errorThrown){
+  //         console.log('通信エラー');
+  //       }.bind(this))
+  //       .always(function(){
+  //         target.isLoading = false;
+  //       });
+      //--------------------------------------
+        this.showEvaluation = false;
+        this.errorEvaluation='';
+      },
+      sendEvaluation: function(id,exhibitcode){
+        if(this.errorEvaluationComment!=''){
+          // this.errorEvaluationComment="評価を入力してください。（4項目）";
+          return;
+        }
+        //確認
+        var result = window.confirm('登録してよろしいでしょうか');
+        if(!result){
+          return;
+        }
+        console.log('sendEvaluation');
+        console.log(exhibitcode);
+        var target = this;
+        var url = '/evaluation/'+exhibitcode;
+        var val = {
+          student_id: id,
+          judge_id : this.judge_id,
+          answer_1 : target.answer_1,
+          answer_2 : target.answer_2,
+          answer_3 : target.answer_3,
+          answer_4 : target.answer_4,
+          comment : this.evaluation_comment,
+          comment_shushoku : this.evaluation_comment_shushoku
+        };
+        $.ajax({
+          url : url,
+          data : val,
+          type : target.answer,
+          dataType : 'json',
+          beforeSend: function(xhr, setting) {
+             target.isLoading = true
+           }
+         })
+        .done(function(data,textStatus,xhr){
+          console.log(data);
+        }.bind(this))
+         .fail(function(xhr, textStatus,errorThrown){
+           console.log('anser1通信エラー');
+         }.bind(this))
+         .always(function(){
+            this.contacts_count=this.contact_count_get();
+            target.isLoading = false;
+            target.evaluationIndex.isEvaluation = true;
+            target.showEvaluation = false;
+         }.bind(this));        
+      },
+      //====共通
+      contact_count_get:function(){
+        var target = this;
+        var url = '/contacts/'+this.judge_id+'/count';
+        var val = {
+        };
+        $.ajax({
+          url : url,
+  //          data : val,
+          type : 'GET',
+          dataType : 'json',
+          beforeSend: function(xhr, setting) {
+            target.isLoading = true
+          }
+        })
+        .done(function(data,textStatus,xhr){
+          console.log(data);
+  //        this.contacts = data;
+  //        this.contacts_count = this.contacts.length;
+          this.contacts_count = data.contact_count_all;
+
+        }.bind(this))
+        .fail(function(xhr, textStatus,errorThrown){
+          console.log('contact_count_get通信エラー');
+        }.bind(this))
+        .always(function(){
+          target.isLoading = false;
+        });
+      },
+      detailViewsDeleteHistory:function(){
+        for(const item of this.products){
+          item.detailViews = false;
+        }
+        this.$cookies.remove("detailViews");
+      },
+      //===予約処理 20250123
+      freesession_reservation:function(reservationdata){
+        console.log(reservationdata);
+        var target = this;
+        var url = `/freesession/reservation/judges/${ reservationdata[0] }/${ reservationdata[1] }`;
+        console.log(url);
+        var val = {
+          student_exhibitcode:reservationdata[2],
+          student_id:reservationdata[3]
+        };
+        $.ajax({
+          url : url,
+          data : val,
+          type : 'POST',
+          dataType : 'json',
+          beforeSend: function(xhr, setting) {
+            target.isLoading = true
+          }
+        })
+        .done(function(data,textStatus,xhr){
+          console.log('###############');
+          console.log(data);
+          console.log(this.details.freesession_count7);
+          console.log(reservationdata[1]);
+          console.log('###############');
+          this.details.freesession_count1 = data.freesession_count1;
+          this.details.freesession_count2 = data.freesession_count2;
+          this.details.freesession_count3 = data.freesession_count3;
+          this.details.freesession_count4 = data.freesession_count4;
+          this.details.freesession_count5 = data.freesession_count5;
+          this.details.freesession_count6 = data.freesession_count6;
+          this.details.freesession_count7 = data.freesession_count7;
+          this.details.freesession_count8 = data.freesession_count8;
+          this.reservations.exhibitcode1 = data.freesession_exhibitcode1;
+          this.reservations.exhibitcode2 = data.freesession_exhibitcode2;
+          this.reservations.exhibitcode3 = data.freesession_exhibitcode3;
+          this.reservations.exhibitcode4 = data.freesession_exhibitcode4;
+          this.reservations.exhibitcode5 = data.freesession_exhibitcode5;
+          this.reservations.exhibitcode6 = data.freesession_exhibitcode6;
+          this.reservations.exhibitcode7 = data.freesession_exhibitcode7;
+          this.reservations.exhibitcode8 = data.freesession_exhibitcode8;
+       }.bind(this))
+        .fail(function(xhr, textStatus,errorThrown){
+          console.log('通信エラー');
+        }.bind(this))
+        .always(function(){
+          target.isLoading = false;
+        });
+      },
+      //===予約cancel処理 20250123
+      freesession_cancel:function(reservationdata){
+        console.log(reservationdata);
+        var target = this;
+        var url = `/freesession/reservation/judges/${ reservationdata[0] }/${ reservationdata[1] }`;
+        console.log(url);
+        var val = {
+          student_exhibitcode:reservationdata[2],
+          student_id:reservationdata[3]
+        };
+        $.ajax({
+          url : url,
+          data : val,
+          type : 'DELETE',
+          dataType : 'json',
+          beforeSend: function(xhr, setting) {
+            target.isLoading = true
+          }
+        })
+        .done(function(data,textStatus,xhr){
+          console.log('###############');
+          console.log(data);
+          console.log(this.details.freesession_count7);
+          console.log(reservationdata[1]);
+          console.log('###############');
+          this.details.freesession_count1 = data.freesession_count1;
+          this.details.freesession_count2 = data.freesession_count2;
+          this.details.freesession_count3 = data.freesession_count3;
+          this.details.freesession_count4 = data.freesession_count4;
+          this.details.freesession_count5 = data.freesession_count5;
+          this.details.freesession_count6 = data.freesession_count6;
+          this.details.freesession_count7 = data.freesession_count7;
+          this.details.freesession_count8 = data.freesession_count8;
+          this.reservations.exhibitcode1 = data.freesession_exhibitcode1;
+          this.reservations.exhibitcode2 = data.freesession_exhibitcode2;
+          this.reservations.exhibitcode3 = data.freesession_exhibitcode3;
+          this.reservations.exhibitcode4 = data.freesession_exhibitcode4;
+          this.reservations.exhibitcode5 = data.freesession_exhibitcode5;
+          this.reservations.exhibitcode6 = data.freesession_exhibitcode6;
+          this.reservations.exhibitcode7 = data.freesession_exhibitcode7;
+          this.reservations.exhibitcode8 = data.freesession_exhibitcode8;
+       }.bind(this))
+        .fail(function(xhr, textStatus,errorThrown){
+          console.log('通信エラー');
+        }.bind(this))
+        .always(function(){
+          target.isLoading = false;
+        });
+      },
+      //===予約cancel処理 20250123
+      //===画面右上の予約一覧メンテナンス
+      freesession_judgement:function(){
+        let startDate = new Date(this.freesession_schedules[0].starttime);
+        startDate.setHours(0, 0, 0)
+        let endDate = new Date(this.freesession_schedules[this.freesession_schedules.length-1].endtime);
+        endDate.setHours(23, 59, 59)
+        var date_now = new Date();
+        console.log('日時計算');
+        console.log(startDate);
+        console.log(endDate);
+        console.log(date_now);
+        console.log('日時計算');
+        
+        // フリーセッションの日付表示
+        this.freeesessionNow = 0;
+        this.freeesessionButtonName = ``;
+        if(date_now < startDate){
+          console.log('フリーセッション前日まで');
+          this.offhours = true;
+          this.isSendCheckboxDisable = true;
+          this.freeesessionButtonName = `フリーセッションは${ this.reservationDatetimeString(5,1) }に実施します。 しばらくお待ちください。`;   
+        }else if(date_now <new Date(this.freesession_schedules[0].starttime - 30 * 60 * 1000)){
+          //フリーセッション当時、まだ時間では無い時の処理
+          this.offhours = false;
+          this.isSendCheckboxDisable = true;  
+          
+          for(let i=0;i<this.freesession_schedules.length;i++){
+            // 既存のDateオブジェクト
+            console.log(this.freesession_schedules[i].starttime);
+            console.log(this.freesession_schedules[i].endtime);
+          }
+          console.log("freesession_schedules[0].starttime:" & this.freesession_schedules[0].starttime)
+          console.log(this.freesession_schedules[0].starttime.getHours());
+          console.log(this.freesession_schedules[0].starttime.getMinutes());
+          console.log(this.freesession_schedules[0].starttime);
+          // 既存のDateオブジェクト
+          let startTime = new Date(this.freesession_schedules[0].starttime);
+          // 時と分をゼロ埋め
+          let hours = String(startTime.getHours()).padStart(2, '0');
+          let minutes = String(startTime.getMinutes()).padStart(2, '0');
+          // フォーマットを適用
+          this.freeesessionButtonName = `${hours}:${minutes}からフリーセッションを開始します。しばらくお待ちください。`;;
+        }else if(date_now < this.freesession_schedules[this.freesession_schedules.length-1].endtime){
+          // フリーセッション期間中の処理
+          this.offhours = false;
+          this.isSendCheckboxDisable = false;  
+          // if(date_now < (this.freesession_schedules[0].starttime - 30 * 60 * 1000)){
+            for(let i=0;i< this.freesession_schedules.length;i++){
+              // 既存のDateオブジェクト
+              // let startTime = Date(this.freesession_schedules[i].starttime);
+              // 30分を加算
+              // startTime.setMinutes(startTime.getMinutes()  - 30);
+              // 既存のDateオブジェクト
+              let startTime = new Date(this.freesession_schedules[i].starttime - 30 * 60 * 1000);
+
+              if(date_now >new Date(this.freesession_schedules[i].endtime)){
+                  switch (this.freesession_schedules[i].schedule_no) {
+                    case 1:
+                      console.log('case 1');
+                      this.judgeReservationHidden1 = true;
+                      break;
+                    case 2:
+                      console.log('case 2');
+                      this.judgeReservationHidden2 = true;
+                      break;
+                    case 3:
+                      console.log('case 3');
+                      this.judgeReservationHidden3 = true;
+                      break;
+                    case 4:
+                      console.log('case 4');
+                      this.judgeReservationHidden4 = true;
+                      break;
+                    case 5:
+                      console.log('case 5');
+                      this.judgeReservationHidden5 = true;
+                      break;
+                    case 6:
+                      console.log('case 6');
+                      this.judgeReservationHidden6 = true;
+                      break;
+                    case 7:
+                      console.log('case 7');
+                      this.judgeReservationHidden7 = true;
+                      break;
+                    case 8:
+                      console.log('case 8');
+                      this.judgeReservationHidden8 = true;
+                      break;
+                  }
+              }else if(startTime < date_now && date_now < new Date(this.freesession_schedules[i].endtime)){
+                // フリーセッション時間帯（freeesessionNow）処理
+                console.log("freesession_schedules[i].schedule_no:" & this.freesession_schedules[i].schedule_no)
+                // フォーマットを適用
+                this.freeesessionNow = this.freesession_schedules[i].schedule_no;
+                console.log(this.freeesessionNow);
+                // this.freeesessionButtonName = 'aaaaaaaaa'
+                this.freeesessionButtonName = `${ this.reservationDatetimeString(0,this.freesession_schedules[i].schedule_no) }のフリーセッションに参加する。`;
+                break;
+              }else{
+                // 日付をまたぐ、まだ時間では無い時の処理
+                // 今後、変更が必要
+                this.offhours = false;
+                this.isSendCheckboxDisable = true;  
+                // 既存のDateオブジェクト
+                let startTime = new Date(this.freesession_schedules[5].starttime);
+                // 時と分をゼロ埋め
+                let hours = String(startTime.getHours()).padStart(2, '0');
+                let minutes = String(startTime.getMinutes()).padStart(2, '0');
+                // フォーマットを適用
+                this.freeesessionButtonName = `${hours}:${minutes}からフリーセッションを開始します。しばらくお待ちください。`;;
+              }
+          }
+        }else{
+          console.log('フリーセッション終了後　');
+          this.offhours = true;
+          this.endhours = true;
+          this.isSendCheckboxDisable = true;
+          this.freeesessionButtonName = `フリーセッションは終了しました。ご参加いただきありがとうございました。`;
+            // 既存のDateオブジェクト
+        }
+      },
+      //===フリーセッション参加ボタンが抑えれた時のメソッド＝＝＝＝＝＝＝＝＝＝
+      freeesession_joining:function(){
+        // this.details = data;
+        // let startDate = new Date(this.freesession_schedules[0].starttime.setHours(0, 0, 0));;
+        // let endDate = new Date(this.freesession_schedules[this.freesession_schedules.length-1].endtime.setHours(23, 59, 59));;
+        var date_now = new Date();
+        console.log('日時計算');
+        this.freeesessionNow = 0;
+        //-------
+        this.judgeReservationHidden1 = false;
+        this.judgeReservationHidden2 = false;
+        this.judgeReservationHidden3 = false;
+        this.judgeReservationHidden4 = false;
+        this.judgeReservationHidden5 = false;
+        this.judgeReservationHidden6 = false;
+        this.judgeReservationHidden7 = false;
+        this.judgeReservationHidden8 = false;
+        //-------        
+        for(let i=0;i<this.freesession_schedules.length;i++){
+          // date.setMinutes(date.getMinutes() - 30); 
+          console.log(this.freesession_schedules[i].starttime);
+          console.log(date_now);
+          console.log(this.freesession_schedules[i].endtime);
+          // 既存のDateオブジェクト
+          // 30分を加算          
+          let startTime =new Date(this.freesession_schedules[i].starttime - 30 * 60 * 1000);
+          // 結果を確認
+          console.log(startTime);
+          if(startTime < date_now && date_now < this.freesession_schedules[i].endtime){
+            console.log("freesession_schedules[i].schedule_no:" & this.freesession_schedules[i].schedule_no)
+            this.freeesessionNow = this.freesession_schedules[i].schedule_no;
+            // window.open('https://www.example.com', '_blank');
+            switch (this.freeesessionNow ) {
+              case 1:
+                if(this.details.freesession_url1 == ''){this.details.supplement += "<br>URLが設定されていません。(1)";return;}
+                window.open(this.details.freesession_url1, '_blank');
+                break;
+              case 2:
+                if(this.details.freesession_url2 == ''){this.details.supplement += "<br>URLが設定されていません。(2)";return;}
+                window.open(this.details.freesession_url2, '_blank');
+                break;
+              case 3:
+                if(this.details.freesession_url3 == ''){this.details.supplement += "<br>URLが設定されていません。(3)";return;}
+                window.open(this.details.freesession_url3, '_blank');
+                break;
+              case 4:
+                if(this.details.freesession_url4 == ''){this.details.supplement += "<br>URLが設定されていません。(4)";return;}
+                window.open(this.details.freesession_url4, '_blank');
+                break;
+              case 5:
+                if(this.details.freesession_url5 == ''){this.details.supplement += "<br>URLが設定されていません。(5)";return;}
+                window.open(this.details.freesession_url5, '_blank');
+                break;
+              case 6:
+                if(this.details.freesession_url6 == ''){this.details.supplement += "<br>URLが設定されていません。(6)";return;}
+                window.open(this.details.freesession_url6, '_blank');
+                break;
+              case 7:
+                if(this.details.freesession_url7 == ''){this.details.supplement += "<br>URLが設定されていません。(7)";return;}
+                window.open(this.details.freesession_url7, '_blank');
+                break;
+              case 8:
+                if(this.details.freesession_url8 == ''){this.details.supplement += "<br>URLが設定されていません。(8)";return;}
+                window.open(this.details.freesession_url8, '_blank');
+                break;
+            }
+            break;
+          }
+        }        
+      },
+      reservationDatetimeString:function(formatNo,scheduleNo){
+        let arrayNo;
+        for(let i=0;i<this.freesession_schedules.length;i++){
+          if(this.freesession_schedules[i].schedule_no == scheduleNo){
+            arrayNo = i;
+            break;
+          }
+        }
+        console.log(scheduleNo);
+        console.log(arrayNo);
+        console.log('▼▼▼this.freesession_schedules▼▼▼');
+        console.log(this.freesession_schedules);
+        console.log('▲▲▲this.freesession_schedules▲▲▲');
+        let startDatetime = new Date(this.freesession_schedules[arrayNo].starttime);
+        console.log('▼▼▼startDatetime▼▼▼');
+        console.log(startDatetime);
+        console.log('▲▲▲startDatetime▲▲▲');
+        let endDatetime =new Date(this.freesession_schedules[arrayNo].endtime);
+        // 日本語の短縮形の曜日を配列で定義
+        let days = ['日', '月', '火', '水', '木', '金', '土'];
+        switch (formatNo) {
+          case 0:
+            return `${startDatetime.getDate()}日(${ days[startDatetime.getDay()] }) ${zeropadding(startDatetime.getHours())}:${zeropadding(startDatetime.getMinutes())}-${zeropadding(endDatetime.getHours())}:${zeropadding(endDatetime.getMinutes())}`;
+          case 1:
+            return `<span>${startDatetime.getDate()}日(${ days[startDatetime.getDay()] })</span><span>${zeropadding(startDatetime.getHours())}:${zeropadding(startDatetime.getMinutes())}-${zeropadding(endDatetime.getHours())}:${zeropadding(endDatetime.getMinutes())}</span>`;
+          case 2:
+            return `${startDatetime.getDate()}日(${ days[startDatetime.getDay()] })`;
+          case 3:
+            return `${zeropadding(startDatetime.getHours())}:${zeropadding(startDatetime.getMinutes())}-${zeropadding(endDatetime.getHours())}:${zeropadding(endDatetime.getMinutes())}`;
+          case 4:
+            return `${zeropadding(startDatetime.getHours())}:${zeropadding(startDatetime.getMinutes())}`;
+          case 5:
+            startDatetime = this.freesession_schedules[0].starttime;
+            endDatetime = this.freesession_schedules[this.freesession_schedules.length-1].endtime;
+            return `${startDatetime.getDate()}日(${ days[startDatetime.getDay()] })〜${endDatetime.getDate()}日(${ days[endDatetime.getDay()] })。`;
+            // return `${startDatetime.getDate()}日(${ days[startDatetime.getDay()] }) ${zeropadding(startDatetime.getHours())}:${zeropadding(startDatetime.getMinutes())}-${endDatetime.getDate()}日(${ days[endDatetime.getDay()] })${zeropadding(endDatetime.getHours())}:${zeropadding(endDatetime.getMinutes())}`;
+        }
+      }
+    },
+  })
+
+function zeropadding(originalData){
+  originalData = String(originalData);
+  return originalData.padStart(2, '0');
+  // return String(originalData.getDate()).padStart(2, '0');
+}
+
+function ajax(url,val,method){
+  return new Promise(resolve => {
+  console.log('---Promise ajax----');
+  console.log(url);
+  console.log(val);
+  console.log(method);
+  console.log('---Promise ajax----');
+    $.ajax({
+    url : url,
+    data : val,
+    type : method,
+    dataType : 'json',
+    // beforeSend: function(xhr, setting) {
+    //    target.isLoading = true
+    //  }
+   })
+   .done((data,textStatus,xhr)=>{
+    console.log('ajax');
+    console.log(data);
+     resolve(data);
+     //this.evaluation = data;
+     //  data.work_typename
+     
+    })
+   .fail((xhr, textStatus,errorThrown)=>{
+     console.log('ajax通信エラー');
+   })
+   .always(()=>{
+    // target.isLoading = false;
+   });
+  });
+}
+
+var contact_count=function(judge_id){
+          //---閉じた時にcontact数を取得-----------------------------------
+          var target = this;
+          var url = '/contacts/'+judge_id+'/count';
+          var val = {
+          };
+          $.ajax({
+            url : url,
+    //          data : val,
+            type : 'GET',
+            dataType : 'json',
+            // beforeSend: function(xhr, setting) {
+            //   target.isLoading = true
+            // }
+          })
+          .done(function(data,textStatus,xhr){
+            console.log(data);
+    //        this.contacts = data;
+    //        this.contacts_count = this.contacts.length;
+            return data.contact_count_all;
+  
+          })
+          .fail(function(xhr, textStatus,errorThrown){
+            console.log('通信エラー-count');
+          })
+          .always(function(){
+            return
+            //target.isLoading = false;
+          });
+        //--------------------------------------
+}
+

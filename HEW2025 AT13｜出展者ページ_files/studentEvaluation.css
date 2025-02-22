@@ -1,0 +1,294 @@
+#evaluationWrap {
+  border: solid 3px #0F359D;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 10px gray;
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+  position: relative;
+}
+#evaluationWrap h3 {
+  color: #fff;
+  background-color: #0F359D;
+  font-size: 1.8rem;
+  font-weight: bold;
+  height: 4rem;
+  line-height: 4rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+#evaluationWrap h3 span {
+  font-size: 1.3rem;
+}
+#evaluationWrap div.evaluationSelect {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  border-bottom: dashed 1px #707070;
+}
+#evaluationWrap div.evaluationSelect h4 {
+  font-size: 1.5rem;
+  width: 20%;
+  background-color: #A2F1FF;
+  box-sizing: border-box;
+  padding: 1.5rem;
+}
+#evaluationWrap div.evaluationSelect ul {
+  width: 80%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+#evaluationWrap div.evaluationSelect ul li:nth-of-type(1) {
+  width: 75%;
+  text-indent: 2rem;
+}
+#evaluationWrap div.evaluationSelect ul li:nth-of-type(2) {
+  width: 25%;
+  position: relative;
+}
+#evaluationWrap div.evaluationSelect ul select {
+  -webkit-appearance: none;
+  text-indent: 0.5px;
+  width: 100%;
+  padding: 5px 0px 5px 5px;
+  border-radius: 3px;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(1) {
+  border-top: solid 1px #707070;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(3) {
+  border: none;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(4) {
+  border-top: solid 1px #707070;
+  border-bottom: solid 1px #707070;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(4) ul li {
+  width: 100%;
+  display: flex;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(4) ul li input[type=radio] {
+  display: none;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(4) ul li label {
+  display: block;
+  width: calc(25% - 2rem);
+  padding: 6px 0px;
+  text-indent: 0;
+  text-align: center;
+  margin: 0 1rem;
+  border: solid #0F359D 1px;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(4) ul li label span {
+  display: block;
+  font-size: 1.2rem;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(4) ul li label:hover {
+  transition: 0.2s;
+  background-color: #0F359D;
+  color: #fff;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(4) ul li input[type=radio]:checked + label {
+  transition: 0.2s;
+  color: #fff;
+  font-weight: bold;
+  background-color: #0F359D;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(5), #evaluationWrap div.evaluationSelect:nth-of-type(6) {
+  display: flex;
+  align-items: stretch;
+  border-bottom: solid 1px #707070;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(5) h4, #evaluationWrap div.evaluationSelect:nth-of-type(6) h4 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(5) h4 span, #evaluationWrap div.evaluationSelect:nth-of-type(6) h4 span {
+  display: block;
+  font-size: 1.1rem;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(5) ul li, #evaluationWrap div.evaluationSelect:nth-of-type(6) ul li {
+  width: 100%;
+  text-indent: 0;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(5) textarea, #evaluationWrap div.evaluationSelect:nth-of-type(6) textarea {
+  background-color: #f3f3f3;
+  width: 100%;
+  height: 120px;
+  padding: 0.8rem;
+  font-size: 1.3rem;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(5) + p, #evaluationWrap div.evaluationSelect:nth-of-type(6) + p {
+  position: absolute;
+  bottom: 19.8rem;
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: red;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(5) {
+  margin-bottom: 1px;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(6) {
+  margin-bottom: 3.8rem;
+  border-top: #707070 double 1px;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(6) h4 {
+  background-color: #fff6a2;
+  flex-wrap: wrap;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(6) h4 span {
+  display: block;
+  font-size: 1.1rem;
+  margin-top: 0.2rem;
+}
+#evaluationWrap div.evaluationSelect:nth-of-type(6) textarea {
+  height: 61px;
+}
+#evaluationWrap .attentionToJudge {
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+#evaluationWrap .attentionToJudge p {
+  color: #2d2d2d;
+  font-size: 1.25rem;
+  line-height: 1.35rem;
+  margin-bottom: 1rem;
+}
+#evaluationWrap .attentionToJudge ul {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+#evaluationWrap .attentionToJudge ul li {
+  width: calc(33.3% - 0.4rem);
+  margin: 0 0.2rem;
+  display: flex;
+  border: solid 1px #0F359D;
+}
+#evaluationWrap .attentionToJudge ul li > p:first-child {
+  box-sizing: border-box;
+  height: 5rem;
+  padding: 1rem;
+  width: 40%;
+  background-color: #0F359D;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+}
+#evaluationWrap .attentionToJudge ul li > p:last-child {
+  width: 60%;
+  display: flex;
+  color: #0F359D;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+  margin-bottom: 0;
+}
+#evaluationWrap .attentionToJudge ul li > p:last-child span {
+  color: #2d2d2d;
+}
+#evaluationWrap .attentionToJudge ul li span {
+  display: block;
+}
+#evaluationWrap .attentionToJudge ul li:last-child > p:first-child {
+  font-size: 1.2rem;
+}
+#evaluationWrap .sendEvaluationBtnWrap {
+  position: relative;
+}
+#evaluationWrap .sendEvaluationBtnWrap::before, #evaluationWrap .sendEvaluationBtnWrap::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 90%;
+  height: 100%;
+  border: 1px solid #fb3400;
+  box-sizing: border-box;
+  pointer-events: none;
+  animation: pulsate 2s linear infinite;
+}
+#evaluationWrap .sendEvaluationBtnWrap::after {
+  animation-delay: 1s;
+}
+#evaluationWrap input[type=button] {
+  color: #fff;
+  display: block;
+  width: 90%;
+  margin: 0 auto;
+  height: 45px;
+  line-height: 45px;
+  box-sizing: border-box;
+  text-align: center;
+  font-weight: bold;
+  background-color: #fb8500;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+#evaluationWrap input[type=button]:hover {
+  transition: 0.2s;
+  background-color: #7e150d;
+}
+#evaluationWrap input[type=button]::before, #evaluationWrap input[type=button]::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #fb8500;
+  box-sizing: border-box;
+  pointer-events: none;
+  animation: pulsate 2s linear infinite;
+}
+#evaluationWrap input[type=button]::after {
+  animation-delay: 1s;
+}
+#evaluationWrap .attention {
+  font-size: 1.5rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-size: 2rem;
+  background-color: #fbd500;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.02, 1.4);
+    opacity: 0;
+  }
+}
+@keyframes pulsate2 {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.05, 1.2);
+    opacity: 0;
+  }
+}/*# sourceMappingURL=studentEvaluation.css.map */
