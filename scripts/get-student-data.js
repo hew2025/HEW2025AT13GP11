@@ -2,8 +2,7 @@
 // ページがロードされた際に実行
 window.onload = function () {
     const path = window.location.pathname;
-    // console.log(path);
-    const segments = path.split('/');
+    let segments = path.split('/');
     
     // Get the second-to-last segment of the URL
     // URLの最後から2番目のセグメントを取得
